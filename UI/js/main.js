@@ -48,24 +48,30 @@
 
     let i = 0;
     // When the user clicks on <span> (x), close the modal
-    close.addEventListener('click', function() {
-        modal.style.display = "none";
-        i = 0;
-    });
+    if (close) {
+        close.addEventListener('click', function() {
+            modal.style.display = "none";
+            i = 0;
+        });
+    }
 
 // Get the <span> element for next and prev
     const nextImg = document.querySelector(".next-img");
     const prevImg = document.querySelector(".prev-img");
 
 // When the user clicks on <span> (>), next
-    nextImg.addEventListener('click', function() {
-        next();
-    });
+    if (nextImg) {
+        nextImg.addEventListener('click', function() {
+            next();
+        });
+    }
 
 // When the user clicks on <span> (<), prev
-    prevImg.addEventListener('click', function() {
-        previous();
-    });
+    if (prevImg) {
+        prevImg.addEventListener('click', function() {
+            previous();
+        });
+    }
 
     function next() {
         if (i < img.length - 1) {
@@ -111,30 +117,36 @@
         });
     });
 
-// Get the <span> element that closes the modal
+    // Get the <span> element that closes the modal
     const close = document.querySelector("#closeVid");
 
     let i = 0;
     // When the user clicks on <span> (x), close the modal
-    close.addEventListener('click', function() {
-        modal.style.display = "none";
-        modalVid.pause();
-        i = 0;
-    });
+    if (close) {
+        close.addEventListener('click', function() {
+            modal.style.display = "none";
+            modalVid.pause();
+            i = 0;
+        });
+    }
 
-// Get the <span> element for next and prev
+     // Get the <span> element for next and prev
     const nextVid = document.querySelector(".next-vid");
     const prevVid = document.querySelector(".prev-vid");
 
-// When the user clicks on <span> (>), next
-    nextVid.addEventListener('click', function() {
-        next();
-    });
-
-// When the user clicks on <span> (<), prev
-    prevVid.addEventListener('click', function() {
-        previous();
-    });
+    // When the user clicks on <span> (>), next
+    if (nextVid) {
+        nextVid.addEventListener('click', function() {
+            next();
+        });
+    }
+    
+   // When the user clicks on <span> (<), prev
+   if (prevVid) {
+       prevVid.addEventListener('click', function() {
+           previous();
+        });
+    }
 
     function next() {
         if (i < vid.length - 1) {
@@ -153,6 +165,30 @@
     }
 })();
 //End Video Modal
+
+//Alert Message Box
+(function () {
+    // Get all elements with class="closebtn"
+    const close = document.querySelectorAll(".closebtn");
+
+    // Loop through all close buttons
+    if (close) {
+        close.forEach(function(close) {
+            // When someone clicks on a close button
+            close.addEventListener('click', function(){
+                // Get the parent of <span class="closebtn"> (<div class="alert">)
+                const div = this.parentElement;
+    
+                // Set the opacity of div to 0 (transparent)
+                div.style.opacity = "0";
+    
+                // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
+                setTimeout(function() {div.style.display = "none"; }, 600);
+            });
+        });
+    }
+})();
+//End Alert Message Box
 
 
 
