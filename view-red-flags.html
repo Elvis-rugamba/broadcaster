@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="css/main.css">
+    <title>Broadcaster | View Red-flags</title>
+</head>
+<body>
+
+<header class="top-bar">
+    <div class="brand">
+        <h1>Broadcaster</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="sign-in.html">Logout</a></li>
+        </ul>
+    </nav>
+    <img src="images/menu.svg">
+</header>
+
+<div class="main">
+
+    <aside>
+        <figure>
+            <div id="avatar"></div>
+            <figcaption>Elvis RUGAMBA</figcaption>
+        </figure>
+        <nav class="menu">
+            <ul>
+                <li><a href="user-profile.html">Profile</a></li>
+                <li><a href="create-red-flag.html">Create red-flag</a></li>
+                <li class="active"><a href="view-red-flags.html">View red-flags</a></li>
+                <li class="divider"></li>
+                <li class="hidden-md"><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <div>
+            <ol class="breadcrumb">
+                <li>Home</li>
+                <li class="active">View Red-flags</li>
+            </ol>
+        </div>
+
+        <div class="forms">
+            <div class="form-grids row widget-shadow">
+                <div class="form-title">Red-flags:</div>
+                <div class="form-body table-responsive">
+                    <table class="table" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Type </th>
+                            <th>Comment</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Created On</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Lorem ipsum dolor sit amet</td>
+                            <td>red-flag</td>
+                            <td class="comment">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                sed do eiusmod tempor incididunt ut labore et dolore magna 
+                                aliqua. Nunc pulvinar sapien et ligula ullamcorper malesuada. 
+                                Aliquam id diam maecenas ultricies mi eget mauris pharetra et. 
+                                Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque elit. 
+                                Amet volutpat consequat mauris nunc congue nisi vitae suscipit. 
+                                Neque viverra justo nec ultrices dui sapien eget.
+                            </td>
+                            <td>-1.8964, 30.0569</td>
+                            <td>draft</td>
+                            <td>Wed, 2 nov 2019 04:44:20 GMT</td>
+                            <td class="actions">
+                                <a class="btn btn-view" href="view-red-flag.html">View</a>
+                                <a class="btn btn-edit" href="edit-red-flag.html">Edit</a>
+                                <a class="btn btn-delete">Delete</a>
+                                <a class="btn btn-edit" href="edit-comment.html">Edit Comment</a>
+                                <a class="btn btn-edit" href="edit-location.html">Change Location</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Lorem ipsum dolor sit amet</td>
+                            <td>intervention</td>
+                            <td>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                sed do eiusmod tempor incididunt ut labore et dolore magna 
+                                aliqua. Nunc pulvinar sapien et ligula ullamcorper malesuada. 
+                                Aliquam id diam maecenas ultricies mi eget mauris pharetra et. 
+                                Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque elit. 
+                                Amet volutpat consequat mauris nunc congue nisi vitae suscipit. 
+                                Neque viverra justo nec ultrices dui sapien eget.
+                            </td>
+                            <td>-1.8960, 30.0565</td>
+                            <td>draft</td>
+                            <td>Wed, 2 nov 2019 04:44:15 GMT</td>
+                            <td class="actions">
+                                <a class="btn btn-view" href="view-red-flag.html">View</a>
+                                <a class="btn btn-edit" href="edit-red-flag.html">Edit</a>
+                                <a class="btn btn-delete">Delete</a>
+                                <a class="btn btn-edit" href="edit-comment.html">Edit Comment</a>
+                                <a class="btn btn-edit" href="edit-location.html">Change Location</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <strong>There is no data to display</strong>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Broadcaster, copyright &copy; 2019
+        </div>
+
+    </main>
+
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
