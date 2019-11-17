@@ -767,6 +767,22 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         })
         .catch((err) => done(err));
     });
+
+    it('it should not update the red-flag record\'s invalid field', (done) => {
+      chai.request(server)
+        .patch(`/api/v1/red-flags/${redFlags[2].id}/invalid`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ invalid: 'Updated comment' })
+        .then((res) => {
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('status');
+          expect(res.body).to.have.property('error');
+          expect(res.body.status).to.be.eql(401);
+          done();
+        })
+        .catch((err) => done(err));
+    });
   });
 
   describe('Delete /api/v1/red-flags/<red-flag-id>', () => {
