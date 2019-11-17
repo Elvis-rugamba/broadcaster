@@ -161,7 +161,6 @@ exports.user_signup = async (req, res) => {
 };
 
 exports.user_signin = async (req, res) => {
-  console.log(process.env.JWT_KEY);
   const { error } = await validateLogin(req.body);
   if (error) {
     return res.status(401).json({
