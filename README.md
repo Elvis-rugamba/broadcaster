@@ -1,1 +1,2 @@
 [![Build Status](https://travis-ci.org/Elvis-rugamba/broadcaster.svg?branch=v1)](https://travis-ci.org/Elvis-rugamba/broadcaster)
+[![Coverage Status](https://coveralls.io/repos/github/Elvis-rugamba/broadcaster/badge.svg)](https://coveralls.io/github/Elvis-rugamba/broadcaster)
