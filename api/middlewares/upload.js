@@ -20,10 +20,12 @@ const fileFilter = (req, file, cb) => {
     } else {
       cb(new Error('Unsupported file type'), false);
     }
-  } else if (file.mimetype === 'video/mp4' || file.mimetype === 'video/ogg') {
-    cb(null, true);
-  } else {
-    cb(new Error('Unsupported file type'), false);
+  } else if (file.fieldname === 'videos') {
+    if (file.mimetype === 'video/mp4' || file.mimetype === 'video/ogg') {
+      cb(null, true);
+    } else {
+      cb(new Error('Unsupported file type'), false);
+    }
   }
 };
 

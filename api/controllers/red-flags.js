@@ -210,9 +210,7 @@ exports.redFlags_update_redFlag = async (req, res, next) => {
 };
 
 exports.redFlags_update_redFlag_field = async (req, res, next) => {
-  console.log(req.params);
   const { redFlagId: id, field } = req.params;
-  console.log(typeof field);
 
   const redFlag = await RedFlag.findById(id);
   if (!redFlag) {
