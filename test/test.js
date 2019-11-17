@@ -386,7 +386,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
           'images', fs.readFileSync('uploads/sample/Fishesharvested2.jpg'), 'Fishesharvested2.jpg',
         )
         .attach(
-          'videos', fs.readFileSync('uploads/sample/mov_bbb.mp4'), 'Collection_Medium.mp4',
+          'videos', fs.readFileSync('uploads/sample/mov_bbb.mp4'), 'mov_bbb.mp4',
         )
         .then((res) => {
           expect(res).to.have.status(200);
@@ -452,7 +452,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
           'images', fs.readFileSync('uploads/sample/Fishesharvested2.jpg'), 'Fishesharvested2.jpg',
         )
         .attach(
-          'videos', fs.readFileSync('uploads/sample/mov_bbb.mp4'), 'Collection_Medium.mp4',
+          'videos', fs.readFileSync('uploads/sample/mov_bbb.mp4'), 'mov_bbb.mp4',
         )
         .then((res) => {
           expect(res).to.have.status(200);
@@ -500,7 +500,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
           'images', fs.readFileSync('uploads/sample/Fishesharvested2.jpg'), 'Fishesharvested2.jpg',
         )
         .attach(
-          'videos', fs.readFileSync('uploads/sample/mov_bbb.mp4'), 'Collection_Medium.mp4',
+          'videos', fs.readFileSync('uploads/sample/mov_bbb.mp4'), 'mov_bbb.mp4',
         )
         .then((res) => {
           expect(res).to.have.status(404);
@@ -541,7 +541,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
           'images', fs.readFileSync('uploads/sample/Fishesharvested2.jpg'), 'Fishesharvested2.jpg',
         )
         .attach(
-          'videos', fs.readFileSync('uploads/sample/mov_bbb.mp4'), 'Collection_Medium.mp4',
+          'videos', fs.readFileSync('uploads/sample/mov_bbb.mp4'), 'mov_bbb.mp4',
         )
         .then((res) => {
           expect(res).to.have.status(401);
@@ -566,7 +566,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
           'images', fs.readFileSync('uploads/sample/Fishesharvested2.jpg'), 'Fishesharvested2.jpg',
         )
         .attach(
-          'videos', fs.readFileSync('uploads/sample/mov_bbb.mp4'), 'Collection_Medium.mp4',
+          'videos', fs.readFileSync('uploads/sample/mov_bbb.mp4'), 'mov_bbb.mp4',
         )
         .then((res) => {
           expect(res).to.have.status(401);
