@@ -249,8 +249,7 @@ exports.redFlags_update_redFlag_field = async (req, res, next) => {
         message: 'Updated red-flag record\'s locaton',
       }],
     });
-  }
-  if (field === 'comment') {
+  } else if (field === 'comment') {
     if (redFlag.status !== 'draft') {
       return res.status(401).json({
         status: 401,
@@ -279,8 +278,7 @@ exports.redFlags_update_redFlag_field = async (req, res, next) => {
         message: 'Updated red-flag record\'s comment',
       }],
     });
-  }
-  if (field === 'status') {
+  } else if (field === 'status') {
     if (req.userData.userType !== 'admin') {
       return res.status(401).json({
         status: 401,
