@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+
+  - "node"
+
+  - "7"
+
+  - "4"
+
+branches:
+  only:
+    - v1
+    - master
+
+cache:
+
+  directories:
+
+    - "node_modules"

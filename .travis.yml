@@ -8,8 +8,13 @@ node_js:
 
   - "4"
 
+branches:
+  only:
+    - v1
+    - master
+
 cache:
 
-   directories:
+  directories:
 
-     - "node_modules"
+    - "node_modules"
