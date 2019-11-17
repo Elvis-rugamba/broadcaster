@@ -4,10 +4,9 @@ node_js:
 
   - "node"
 
-branches:
-  only:
-    - v1
-    - master
+install:
+
+  - npm install
 
 cache:
 
