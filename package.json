@@ -7,13 +7,17 @@
     "start": "nodemon server.js",
     "lint": "./node_modules/.bin/eslint server.js",
     "test": "nyc ./node_modules/.bin/mocha",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
+    "coverage": "npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
   },
   "author": "Elvis Rugamba",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "codeclimate-test-reporter": "^0.5.1",
     "coveralls": "^3.0.7",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
