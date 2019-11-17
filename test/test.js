@@ -22,7 +22,7 @@ describe('Create user account, Login a user and Check token', () => {
     done();
   });
 
-  describe('GET /api/v1/auth', () => {
+  /* describe('GET /api/v1/auth', () => {
     it('it should GET all users', (done) => {
       chai.request(server)
         .get('/api/v1/auth')
@@ -37,7 +37,7 @@ describe('Create user account, Login a user and Check token', () => {
         })
         .catch((err) => done(err));
     });
-  });
+  }); */
 
   describe('POST /api/v1/auth/signup', () => {
     it('it should create a user account and return auth token', (done) => {
@@ -192,6 +192,32 @@ describe('Create user account, Login a user and Check token', () => {
         })
         .catch((err) => done(err));
     });
+
+    it('it should not create a user account without confirming password', (done) => {
+      const userRegister = {
+        firstname: 'Elvis',
+        lastname: 'Rugamba',
+        email: 'rugamba@gmail.com',
+        phoneNumber: users[0].phoneNumber,
+        username: 'rugamba',
+        password: 'Rug123',
+        password2: 'Rug12',
+        type: 'admin',
+      };
+
+      chai.request(server)
+        .post('/api/v1/auth/signup')
+        .send(userRegister)
+        .then((res) => {
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('status');
+          expect(res.body).to.have.property('error');
+          expect(res.body.status).to.be.eql(401);
+          done();
+        })
+        .catch((err) => done(err));
+    });
   });
 
   describe('POST /api/v1/auth/signin', () => {
@@ -239,10 +265,31 @@ describe('Create user account, Login a user and Check token', () => {
         .catch((err) => done(err));
     });
 
-    it('it should not login a user with incorrect email or password', (done) => {
+    it('it should not login a user with incorrect email', (done) => {
       const userLogin = {
         email: 'rug@gmail.com',
         password: 'elVis123',
+      };
+
+      chai.request(server)
+        .post('/api/v1/auth/signin')
+        .send(userLogin)
+        .then((res) => {
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('status');
+          expect(res.body).to.have.property('error');
+          expect(res.body.status).to.be.eql(401);
+          // expect(res.headers.Authorization).not.toBeNull();
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('it should not login a user with incorrect password', (done) => {
+      const userLogin = {
+        email: 'rugamba@gmail.com',
+        password: 'elVis12',
       };
 
       chai.request(server)
@@ -920,6 +967,38 @@ describe('Admin change red-flag record\'s status and list all the red-flags crea
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
           expect(res.body.status).to.be.eql(401);
+          done();
+        })
+        .catch((err) => done(err));
+    });
+  });
+});
+
+describe('Not found', () => {
+  beforeEach((done) => {
+    const payload = {
+      userId: users[1].id,
+      email: users[1].email,
+      username: users[1].username,
+      firstname: users[1].firstname,
+      lastname: users[1].lastname,
+      userType: users[1].type,
+    };
+    token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: 3600 });
+    done();
+  });
+
+  describe('GET /api/v1/unknown', () => {
+    it('it should return 404 for invalid API endpoints', (done) => {
+      chai.request(server)
+        .get('/api/v1/uknown')
+        .set('Authorization', `Bearer ${token}`)
+        .then((res) => {
+          expect(res).to.have.status(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('status');
+          expect(res.body).to.have.property('error');
+          expect(res.body.status).to.be.eql(404);
           done();
         })
         .catch((err) => done(err));

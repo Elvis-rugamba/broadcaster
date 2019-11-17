@@ -48,8 +48,8 @@ module.exports.findByUserName = (val) => users.find((user) => user.username === 
 
 module.exports.findByPhoneNumber = (val) => users.find((user) => user.phoneNumber === val);
 
-module.exports.delete = (user) => {
+/* module.exports.delete = (user) => {
   const index = users.indexOf(user);
   users.splice(index, 1);
   return user;
-};
+}; */

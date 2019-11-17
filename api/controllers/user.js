@@ -138,7 +138,7 @@ exports.user_signup = async (req, res) => {
           lastname: user.lastname,
           userType: user.type,
         },
-        'secret',
+        process.env.JWT_KEY,
         {
           expiresIn: '1h',
         },
@@ -178,46 +178,44 @@ exports.user_signin = async (req, res) => {
     });
   }
 
-  bcrypt.compare(req.body.password, user.password, (err, result) => {
-    if (err) {
-      return res.status(401).json({
-        status: 401,
-        error: 'Incorrect Email or Password',
-      });
-    }
-    if (result) {
-      jwt.sign(
-        {
-          userId: user.id,
-          email: user.email,
-          username: user.username,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          userType: user.type,
-        },
-        'secret',
-        {
-          expiresIn: '1h',
-        },
-        (er, token) => {
-          if (er) {
-            return res.status(500).json({
-              status: 500,
-              error: er,
-            });
-          }
-          res.status(200).json({
-            status: 200,
-            message: 'User is successfully logged in',
-            data: { token: token },
+  const match = await bcrypt.compare(req.body.password, user.password);
+  if (match) {
+    jwt.sign(
+      {
+        userId: user.id,
+        email: user.email,
+        username: user.username,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        userType: user.type,
+      },
+      process.env.JWT_KEY,
+      {
+        expiresIn: '1h',
+      },
+      (er, token) => {
+        if (er) {
+          return res.status(500).json({
+            status: 500,
+            error: er,
           });
-        },
-      );
-    }
-  });
+        }
+        res.status(200).json({
+          status: 200,
+          message: 'User is successfully logged in',
+          data: { token: token },
+        });
+      },
+    );
+  } else {
+    return res.status(401).json({
+      status: 401,
+      error: 'Incorrect Email or Password',
+    });
+  }
 };
 
-exports.user_delete = async (req, res) => {
+/* exports.user_delete = async (req, res) => {
   const id = req.params.userId;
   const user = await User.findById(id);
   if (!user) {
@@ -236,4 +234,4 @@ exports.user_delete = async (req, res) => {
 
     }],
   });
-};
+}; */
