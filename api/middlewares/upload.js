@@ -18,14 +18,22 @@ const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
       cb(null, true);
     } else {
-      cb(new Error('Unsupported file type'), false);
+      const error = new Error('Unsupported image file type');
+      error.status = 415;
+      cb(error, false);
     }
   } else if (file.fieldname === 'videos') {
     if (file.mimetype === 'video/mp4' || file.mimetype === 'video/ogg') {
       cb(null, true);
     } else {
-      cb(new Error('Unsupported file type'), false);
+      const error = new Error('Unsupported video file type');
+      error.status = 415;
+      cb(error, false);
     }
+  } else {
+    const error = new Error('Invalid field name');
+    error.status = 401;
+    cb(error, false);
   }
 };
 

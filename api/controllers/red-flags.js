@@ -327,9 +327,9 @@ exports.redFlags_delete_redFlag = async (req, res, next) => {
   }
 
   if (redFlag.createdBy !== req.userData.userId) {
-    return res.status(401).json({
-      status: 401,
-      error: 'Unauthorized',
+    return res.status(403).json({
+      status: 403,
+      error: 'Access denied',
     });
   }
 
