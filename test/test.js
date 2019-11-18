@@ -79,11 +79,11 @@ describe('Create user account, Login a user and Check token', () => {
         .post('/api/v1/auth/signup')
         .send(userRegister)
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(405);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(405);
           done();
         })
         .catch((err) => done(err));
@@ -105,11 +105,11 @@ describe('Create user account, Login a user and Check token', () => {
         .post('/api/v1/auth/signup')
         .send(userRegister)
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(405);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(405);
           done();
         })
         .catch((err) => done(err));
@@ -209,11 +209,11 @@ describe('Create user account, Login a user and Check token', () => {
         .post('/api/v1/auth/signup')
         .send(userRegister)
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(405);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(405);
           done();
         })
         .catch((err) => done(err));
@@ -238,7 +238,7 @@ describe('Create user account, Login a user and Check token', () => {
           expect(res.body).to.have.property('data');
           expect(res.body.data).to.be.an('object');
           expect(res.body.data).to.have.property('token');
-          // expect(res.headers.Authorization).not.toBeNull();
+          // expect(res.headers.token).not.toBeNull();
           done();
         })
         .catch((err) => done(err));
@@ -254,12 +254,12 @@ describe('Create user account, Login a user and Check token', () => {
         .post('/api/v1/auth/signin')
         .send(userLogin)
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(405);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
-          // expect(res.headers.Authorization).not.toBeNull();
+          expect(res.body.status).to.be.eql(405);
+          // expect(res.headers.token).not.toBeNull();
           done();
         })
         .catch((err) => done(err));
@@ -280,7 +280,7 @@ describe('Create user account, Login a user and Check token', () => {
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
           expect(res.body.status).to.be.eql(401);
-          // expect(res.headers.Authorization).not.toBeNull();
+          // expect(res.headers.token).not.toBeNull();
           done();
         })
         .catch((err) => done(err));
@@ -301,7 +301,7 @@ describe('Create user account, Login a user and Check token', () => {
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
           expect(res.body.status).to.be.eql(401);
-          // expect(res.headers.Authorization).not.toBeNull();
+          // expect(res.headers.token).not.toBeNull();
           done();
         })
         .catch((err) => done(err));
@@ -327,7 +327,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should fetch all ​red-flag ​records', (done) => {
       chai.request(server)
         .get('/api/v1/red-flags')
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
@@ -344,7 +344,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not fetch all ​red-flag ​records without being authenticated', (done) => {
       chai.request(server)
         .get('/api/v1/red-flags')
-        .set('Authorization', 'Bearer uknown/token')
+        .set('token', 'Bearer uknown/token')
         .then((res) => {
           expect(res).to.have.status(401);
           expect(res.body).to.be.an('object');
@@ -361,7 +361,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should fetch a specific ​red-flag​ record', (done) => {
       chai.request(server)
         .get(`/api/v1/red-flags/${redFlags[0].id}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
@@ -377,7 +377,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not fetch the ​red-flag​ record without being authenticated', (done) => {
       chai.request(server)
         .get(`/api/v1/red-flags/${redFlags[0].id}`)
-        .set('Authorization', 'Bearer uknown/token')
+        .set('token', 'Bearer uknown/token')
         .then((res) => {
           expect(res).to.have.status(401);
           expect(res.body).to.be.an('object');
@@ -392,13 +392,13 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not fetch the ​red-flag​ record with unkown ID', (done) => {
       chai.request(server)
         .get('/api/v1/red-flags/12')
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
-          expect(res).to.have.status(404);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(404);
+          expect(res.body.status).to.be.eql(400);
           done();
         })
         .catch((err) => done(err));
@@ -407,13 +407,13 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not fetch the other user\'s ​red-flag​ record', (done) => {
       chai.request(server)
         .get(`/api/v1/red-flags/${redFlags[2].id}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(403);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(403);
           done();
         })
         .catch((err) => done(err));
@@ -424,7 +424,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should create a ​red-flag​ record', (done) => {
       chai.request(server)
         .post('/api/v1/red-flags')
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .field('title', 'title test')
         .field('type', 'intervention')
         .field('comment', 'comment test')
@@ -447,7 +447,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not create a ​red-flag​ record without being authenticated', (done) => {
       chai.request(server)
         .get('/api/v1/red-flags')
-        .set('Authorization', 'Bearer uknown/token')
+        .set('token', 'Bearer uknown/token')
         .field('title', 'Updated title test')
         .field('type', 'intervention')
         .field('comment', 'comment test')
@@ -466,14 +466,14 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not create a red-flag record with missing required fields', (done) => {
       chai.request(server)
         .post('/api/v1/red-flags')
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .field('title', 'Updated title test')
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(405);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(405);
           done();
         })
         .catch((err) => done(err));
@@ -484,7 +484,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should update the ​red-flag​ record', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .field('title', 'Updated title test')
         .field('type', 'intervention')
         .field('comment', 'Updated comment test')
@@ -507,7 +507,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the red-flag record without being authenticated', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}`)
-        .set('Authorization', 'Bearer uknown/token')
+        .set('token', 'Bearer uknown/token')
         .field('title', 'Updated title test')
         .field('type', 'intervention')
         .field('comment', 'Updated comment test')
@@ -526,17 +526,17 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the ​red-flag​ record with unkown ID', (done) => {
       chai.request(server)
         .patch('/api/v1/red-flags/12')
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .field('title', 'Updated title test')
         .field('type', 'intervention')
         .field('comment', 'Updated comment test')
         .field('location', '50.5556, -45.5644')
         .then((res) => {
-          expect(res).to.have.status(404);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(404);
+          expect(res.body.status).to.be.eql(400);
           done();
         })
         .catch((err) => done(err));
@@ -544,15 +544,15 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
 
     it('it should not update the red-flag record with missing required fields', (done) => {
       chai.request(server)
-        .patch(`/api/v1/red-flags/${redFlags[2].id}`)
-        .set('Authorization', `Bearer ${token}`)
+        .patch(`/api/v1/red-flags/${redFlags[0].id}`)
+        .set('token', `Bearer ${token}`)
         .field('title', 'Updated title test')
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(405);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(405);
           done();
         })
         .catch((err) => done(err));
@@ -561,17 +561,17 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the other user\'s red-flag record', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[2].id}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .field('title', 'Updated title test')
         .field('type', 'intervention')
         .field('comment', 'Updated comment test')
         .field('location', '50.5556, -45.5644')
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(403);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(403);
           done();
         })
         .catch((err) => done(err));
@@ -580,7 +580,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it(`it should not update the red-flag record that is ${redFlags[1].status}`, (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[1].id}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .field('title', 'Updated title test')
         .field('type', 'intervention')
         .field('comment', 'Updated comment test')
@@ -601,7 +601,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should update the ​red-flag​ record\'s location', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}/location`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .send({ location: '50.5556, -45.5644' })
         .then((res) => {
           expect(res).to.have.status(200);
@@ -621,7 +621,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the red-flag record\'s location without being authenticated', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}/location`)
-        .set('Authorization', 'Bearer uknown/token')
+        .set('token', 'Bearer uknown/token')
         .send({ location: '50.5556, -45.56s44' })
         .then((res) => {
           expect(res).to.have.status(401);
@@ -637,14 +637,14 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the ​red-flag​ record\'s location with unkown ID', (done) => {
       chai.request(server)
         .patch('/api/v1/red-flags/12/location')
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .send({ location: '50.5556, -45.56s44' })
         .then((res) => {
-          expect(res).to.have.status(404);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(404);
+          expect(res.body.status).to.be.eql(400);
           done();
         })
         .catch((err) => done(err));
@@ -653,14 +653,14 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the red-flag record\'s location with missing required fields', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}/location`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .send({ location: '' })
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(405);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(405);
           done();
         })
         .catch((err) => done(err));
@@ -669,14 +669,14 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the other user\'s red-flag record\'s location', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[2].id}/location`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .send({ location: '50.5556, -45.56s44' })
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(403);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(403);
           done();
         })
         .catch((err) => done(err));
@@ -687,7 +687,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should update the ​red-flag​ record\'s comment', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}/comment`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .send({ comment: 'Updated comment' })
         .then((res) => {
           expect(res).to.have.status(200);
@@ -707,7 +707,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the red-flag record\'s comment without being authenticated', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}/comment`)
-        .set('Authorization', 'Bearer uknown/token')
+        .set('token', 'Bearer uknown/token')
         .send({ comment: 'Updated comment' })
         .then((res) => {
           expect(res).to.have.status(401);
@@ -723,14 +723,14 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the ​red-flag​ record\'s comment with unkown ID', (done) => {
       chai.request(server)
         .patch('/api/v1/red-flags/12/location')
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .send({ comment: 'Updated comment' })
         .then((res) => {
-          expect(res).to.have.status(404);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(404);
+          expect(res.body.status).to.be.eql(400);
           done();
         })
         .catch((err) => done(err));
@@ -739,14 +739,14 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the red-flag record\'s comment with missing required fields', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}/comment`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .send({ comment: '' })
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(405);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(405);
           done();
         })
         .catch((err) => done(err));
@@ -755,14 +755,14 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the other user\'s red-flag record\'s comment', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[2].id}/comment`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .send({ comment: 'Updated comment' })
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(403);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(403);
           done();
         })
         .catch((err) => done(err));
@@ -771,7 +771,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not update the red-flag record\'s invalid field', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[2].id}/invalid`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .send({ invalid: 'Updated comment' })
         .then((res) => {
           expect(res).to.have.status(401);
@@ -793,7 +793,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should delete the ​red-flag​ record', (done) => {
       chai.request(server)
         .delete(`/api/v1/red-flags/${redFlags[0].id}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
@@ -812,7 +812,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not delete the red-flag record without being authenticated', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}`)
-        .set('Authorization', 'Bearer uknown/token')
+        .set('token', 'Bearer uknown/token')
         .then((res) => {
           expect(res).to.have.status(401);
           expect(res.body).to.be.an('object');
@@ -827,13 +827,13 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not delete the ​red-flag​ record with unkown ID', (done) => {
       chai.request(server)
         .delete('/api/v1/red-flags/12')
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
-          expect(res).to.have.status(404);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(404);
+          expect(res.body.status).to.be.eql(400);
           done();
         })
         .catch((err) => done(err));
@@ -842,13 +842,13 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not delete the other user\'s ​red-flag​ record', (done) => {
       chai.request(server)
         .delete(`/api/v1/red-flags/${redFlags[1].id}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(403);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
-          expect(res.body.status).to.be.eql(401);
+          expect(res.body.status).to.be.eql(403);
           done();
         })
         .catch((err) => done(err));
@@ -857,7 +857,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it(`it should not delete red-flag record that is ${redFlags[1].status}`, (done) => {
       chai.request(server)
         .delete(`/api/v1/red-flags/${redFlags[0].id}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
           expect(res).to.have.status(401);
           expect(res.body).to.be.an('object');
@@ -889,7 +889,7 @@ describe('Admin change red-flag record\'s status and list all the red-flags crea
     it('it should fetch all ​red-flag ​records', (done) => {
       chai.request(server)
         .get('/api/v1/red-flags')
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
@@ -906,7 +906,7 @@ describe('Admin change red-flag record\'s status and list all the red-flags crea
     it('it should not fetch all ​red-flag ​records without being authenticated', (done) => {
       chai.request(server)
         .get('/api/v1/red-flags')
-        .set('Authorization', 'Bearer uknown/token')
+        .set('token', 'Bearer uknown/token')
         .then((res) => {
           expect(res).to.have.status(401);
           expect(res.body).to.be.an('object');
@@ -923,7 +923,7 @@ describe('Admin change red-flag record\'s status and list all the red-flags crea
     it('it should fetch a specific ​red-flag​ record', (done) => {
       chai.request(server)
         .get(`/api/v1/red-flags/${redFlags[0].id}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
@@ -939,7 +939,7 @@ describe('Admin change red-flag record\'s status and list all the red-flags crea
     it('it should not fetch a specific ​red-flag​ record without being authenticated', (done) => {
       chai.request(server)
         .get(`/api/v1/red-flags/${redFlags[0].id}`)
-        .set('Authorization', 'Bearer uknown/token')
+        .set('token', 'Bearer uknown/token')
         .then((res) => {
           expect(res).to.have.status(401);
           expect(res.body).to.be.an('object');
@@ -956,7 +956,7 @@ describe('Admin change red-flag record\'s status and list all the red-flags crea
     it('it should update the ​red-flag​ record\'s status', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}/status`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .send({ status: 'under investigation' })
         .then((res) => {
           expect(res).to.have.status(200);
@@ -976,7 +976,7 @@ describe('Admin change red-flag record\'s status and list all the red-flags crea
     it('it should not update the ​red-flag​ record\'s status without being authenticated', (done) => {
       chai.request(server)
         .patch(`/api/v1/red-flags/${redFlags[0].id}/status`)
-        .set('Authorization', 'Bearer uknown/token')
+        .set('token', 'Bearer uknown/token')
         .then((res) => {
           expect(res).to.have.status(401);
           expect(res.body).to.be.an('object');
@@ -1008,7 +1008,7 @@ describe('Not found', () => {
     it('it should return 404 for invalid API endpoints', (done) => {
       chai.request(server)
         .get('/api/v1/uknown')
-        .set('Authorization', `Bearer ${token}`)
+        .set('token', `Bearer ${token}`)
         .then((res) => {
           expect(res).to.have.status(404);
           expect(res.body).to.be.an('object');

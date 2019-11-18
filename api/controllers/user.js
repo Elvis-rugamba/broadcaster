@@ -74,8 +74,8 @@ exports.user_signup = async (req, res) => {
   const users = User.all;
   const { error } = await validateUser(req.body);
   if (error) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(405).json({
+      status: 405,
       error: error.details[0].message,
     });
   }
@@ -163,8 +163,8 @@ exports.user_signup = async (req, res) => {
 exports.user_signin = async (req, res) => {
   const { error } = await validateLogin(req.body);
   if (error) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(405).json({
+      status: 405,
       error: error.details[0].message,
     });
   }

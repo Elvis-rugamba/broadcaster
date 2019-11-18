@@ -82,8 +82,8 @@ exports.redFlags_create_redFlag = async (req, res, next) => {
 
   const { error } = validateRedFlag(req.body);
   if (error) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(405).json({
+      status: 405,
       error: error.details[0].message,
     });
   }
@@ -119,16 +119,16 @@ exports.redFlags_get_redFlag = async (req, res, next) => {
   const id = req.params.redFlagId;
   const redFlag = await RedFlag.findById(id);
   if (!redFlag) {
-    return res.status(404).json({
-      status: 404,
+    return res.status(400).json({
+      status: 400,
       error: 'The red-flag with the given ID not found',
     });
   }
   if (req.userData.userType === 'user') {
     if (redFlag.createdBy !== req.userData.userId) {
-      return res.status(401).json({
-        status: 401,
-        error: 'Unauthorized',
+      return res.status(403).json({
+        status: 403,
+        error: 'Access denied',
       });
     }
     return res.status(200).json({
@@ -153,8 +153,8 @@ exports.redFlags_update_redFlag = async (req, res, next) => {
 
   const redFlag = await RedFlag.findById(id);
   if (!redFlag) {
-    return res.status(404).json({
-      status: 404,
+    return res.status(400).json({
+      status: 400,
       error: 'The red-flag with the given ID not found',
     });
   }
@@ -167,16 +167,16 @@ exports.redFlags_update_redFlag = async (req, res, next) => {
   }
 
   if (redFlag.createdBy !== req.userData.userId) {
-    return res.status(401).json({
-      status: 401,
-      error: 'Unauthorized',
+    return res.status(403).json({
+      status: 403,
+      error: 'Access denied',
     });
   }
 
   const { error } = validateRedFlag(req.body);
   if (error) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(405).json({
+      status: 405,
       error: error.details[0].message,
     });
   }
@@ -214,8 +214,8 @@ exports.redFlags_update_redFlag_field = async (req, res, next) => {
 
   const redFlag = await RedFlag.findById(id);
   if (!redFlag) {
-    return res.status(404).json({
-      status: 404,
+    return res.status(400).json({
+      status: 400,
       error: 'The red-flag with the given ID not found',
     });
   }
@@ -228,15 +228,15 @@ exports.redFlags_update_redFlag_field = async (req, res, next) => {
       });
     }
     if (redFlag.createdBy !== req.userData.userId) {
-      return res.status(401).json({
-        status: 401,
-        error: 'Unauthorized',
+      return res.status(403).json({
+        status: 403,
+        error: 'Access denied',
       });
     }
     const { error } = validateLoction(req.body);
     if (error) {
-      return res.status(401).json({
-        status: 401,
+      return res.status(405).json({
+        status: 405,
         error: error.details[0].message,
       });
     }
@@ -257,15 +257,15 @@ exports.redFlags_update_redFlag_field = async (req, res, next) => {
       });
     }
     if (redFlag.createdBy !== req.userData.userId) {
-      return res.status(401).json({
-        status: 401,
-        error: 'Unauthorized',
+      return res.status(403).json({
+        status: 403,
+        error: 'Access denied',
       });
     }
     const { error } = validateComment(req.body);
     if (error) {
-      return res.status(401).json({
-        status: 401,
+      return res.status(405).json({
+        status: 405,
         error: error.details[0].message,
       });
     }
@@ -313,8 +313,8 @@ exports.redFlags_delete_redFlag = async (req, res, next) => {
   const id = req.params.redFlagId;
   const redFlag = await RedFlag.findById(id);
   if (!redFlag) {
-    return res.status(404).json({
-      status: 404,
+    return res.status(400).json({
+      status: 400,
       error: 'The red-flag with the given ID not found',
     });
   }
