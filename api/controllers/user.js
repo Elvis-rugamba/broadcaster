@@ -49,6 +49,19 @@ function validateUser(user) {
   return schema.validate(user);
 }
 
+function validateLogin(user) {
+  const schema = Joi.object({
+    email: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      .required(),
+
+    password: Joi.string()
+      .required(),
+  });
+
+  return schema.validate(user);
+}
+
 exports.user_get_all = async (req, res, next) => {
   const users = User.all;
   res.status(200).json({
@@ -146,3 +159,78 @@ exports.user_signup = async (req, res) => {
     }
   });
 };
+
+exports.user_signin = async (req, res) => {
+  const { error } = await validateLogin(req.body);
+  if (error) {
+    return res.status(405).json({
+      status: 405,
+      error: error.details[0].message,
+    });
+  }
+
+  const user = await User.findByEmail(req.body.email);
+  if (!user) {
+    return res.status(401).json({
+      status: 401,
+      error: 'Incorrect Email or Password',
+    });
+  }
+
+  const match = await bcrypt.compare(req.body.password, user.password);
+  if (match) {
+    jwt.sign(
+      {
+        userId: user.id,
+        email: user.email,
+        username: user.username,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        userType: user.type,
+      },
+      process.env.JWT_KEY,
+      {
+        expiresIn: '1h',
+      },
+      (er, token) => {
+        if (er) {
+          return res.status(500).json({
+            status: 500,
+            error: er,
+          });
+        }
+        res.status(200).json({
+          status: 200,
+          message: 'User is successfully logged in',
+          data: { token: token },
+        });
+      },
+    );
+  } else {
+    return res.status(401).json({
+      status: 401,
+      error: 'Incorrect Email or Password',
+    });
+  }
+};
+
+/* exports.user_delete = async (req, res) => {
+  const id = req.params.userId;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).json({
+      status: 404,
+      error: 'The user with the given ID not found',
+    });
+  }
+
+  const deletedUser = await User.delete(user);
+  res.status(200).json({
+    status: 200,
+    data: [{
+      id: deletedUser.id,
+      message: 'User record has been deleted',
+
+    }],
+  });
+}; */
