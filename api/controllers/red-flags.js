@@ -308,3 +308,38 @@ exports.redFlags_update_redFlag_field = async (req, res, next) => {
     });
   }
 };
+
+exports.redFlags_delete_redFlag = async (req, res, next) => {
+  const id = req.params.redFlagId;
+  const redFlag = await RedFlag.findById(id);
+  if (!redFlag) {
+    return res.status(400).json({
+      status: 400,
+      error: 'The red-flag with the given ID not found',
+    });
+  }
+
+  if (redFlag.status !== 'draft') {
+    return res.status(401).json({
+      status: 401,
+      error: `Can not edit red-flag record because it is ${redFlag.status}`,
+    });
+  }
+
+  if (redFlag.createdBy !== req.userData.userId) {
+    return res.status(403).json({
+      status: 403,
+      error: 'Access denied',
+    });
+  }
+
+  const removedRedFlag = await RedFlag.delete(redFlag);
+  res.status(200).json({
+    status: 200,
+    data: [{
+      id: removedRedFlag.id,
+      message: 'Red-flag record has been deleted',
+
+    }],
+  });
+};
