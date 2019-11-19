@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const userRoutes = require('./api/routes/user');
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+app.use('/api/v1/auth', userRoutes);
 
 app.use((req, res, next) => {
   const error = new Error('Not found');
