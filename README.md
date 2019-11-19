@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Elvis-rugamba/broadcaster.svg?branch=API-v1)](https://travis-ci.org/Elvis-rugamba/broadcaster)
+
+
 # broadcaster
 Andela Developer Challenge Product
 
