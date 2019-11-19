@@ -15,4 +15,6 @@ router.patch('/:redFlagId', checkAuth, upload.fields([{ name: 'images', maxCount
 
 router.patch('/:redFlagId/:field', checkAuth, RedFlagsController.redFlags_update_redFlag_field);
 
+router.delete('/:redFlagId', checkAuth, RedFlagsController.redFlags_delete_redFlag);
+
 module.exports = router;
