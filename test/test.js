@@ -307,6 +307,41 @@ describe('Create user account, Login a user and Check token', () => {
         .catch((err) => done(err));
     });
   });
+
+  describe('DELETE /api/v1/auth/userId', () => {
+    it('it should delete a user', (done) => {
+      chai.request(server)
+        .delete('/api/v1/auth/3')
+        .then((res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('status');
+          expect(res.body).to.have.property('data');
+          expect(res.body.status).to.be.eql(200);
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0]).to.have.property('id');
+          expect(res.body.data[0]).to.have.property('message');
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('it should not delete a user with invalid ID', (done) => {
+      chai.request(server)
+        .delete('/api/v1/auth/10')
+        .then((res) => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('status');
+          expect(res.body).to.have.property('error');
+          expect(res.body.status).to.be.eql(400);
+          // expect(res.headers.token).not.toBeNull();
+          done();
+        })
+        .catch((err) => done(err));
+    });
+  });
 });
 
 describe('Users create red-flag record, edit and delete their red-flags', () => {
@@ -421,7 +456,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
   });
 
   describe('POST /api/v1/red-flags', () => {
-    it('it should create a ​red-flag​ record '+__dirname, (done) => {
+    it('it should create a ​red-flag​ record ', (done) => {
       chai.request(server)
         .post('/api/v1/red-flags')
         .set('token', `Bearer ${token}`)
@@ -480,6 +515,31 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
           expect(res.body).to.have.property('status');
           expect(res.body).to.have.property('error');
           expect(res.body.status).to.be.eql(405);
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('it should not create a red-flag record with unsupported image or video file type', (done) => {
+      chai.request(server)
+        .post('/api/v1/red-flags')
+        .set('token', `Bearer ${token}`)
+        .field('title', 'Updated title test')
+        .field('type', 'intervention')
+        .field('comment', 'comment test')
+        .field('location', '50.5556, -45.5644')
+        .attach(
+          'images', fs.readFileSync(`${__dirname}/sample files/giphy.gif`), 'giphy.gif',
+        )
+        .attach(
+          'videos', fs.readFileSync(`${__dirname}/sample files/giphy.gif`), 'giphy.gif',
+        )
+        .then((res) => {
+          expect(res).to.have.status(415);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('status');
+          expect(res.body).to.have.property('error');
+          expect(res.body.status).to.be.eql(415);
           done();
         })
         .catch((err) => done(err));

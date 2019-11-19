@@ -214,12 +214,12 @@ exports.user_signin = async (req, res) => {
   }
 };
 
-/* exports.user_delete = async (req, res) => {
+exports.user_delete = async (req, res) => {
   const id = req.params.userId;
   const user = await User.findById(id);
   if (!user) {
-    return res.status(404).json({
-      status: 404,
+    return res.status(400).json({
+      status: 400,
       error: 'The user with the given ID not found',
     });
   }
@@ -233,4 +233,4 @@ exports.user_signin = async (req, res) => {
 
     }],
   });
-}; */
+};
