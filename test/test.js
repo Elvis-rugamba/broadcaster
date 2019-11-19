@@ -464,9 +464,6 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         .field('type', 'intervention')
         .field('comment', 'comment test')
         .field('location', '50.5556, -45.5644')
-        .attach(
-          'images', fs.readFileSync(`${__dirname}/sample files/Fishesharvested2.jpg`), 'Fishesharvested2.jpg',
-        )
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
