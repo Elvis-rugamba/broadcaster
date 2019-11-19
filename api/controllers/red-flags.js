@@ -112,3 +112,68 @@ exports.redFlags_create_redFlag = async (req, res, next) => {
     }],
   });
 };
+
+exports.redFlags_update_redFlag = async (req, res, next) => {
+  const id = req.params.redFlagId;
+  const redFlagImages = req.files.images;
+  const redFlagVideos = req.files.videos;
+  let images = [];
+  let videos = [];
+
+  const redFlag = await RedFlag.findById(id);
+  if (!redFlag) {
+    return res.status(400).json({
+      status: 400,
+      error: 'The red-flag with the given ID not found',
+    });
+  }
+
+  if (redFlag.status !== 'draft') {
+    return res.status(401).json({
+      status: 401,
+      error: `Can not edit red-flag record because it is ${redFlag.status}`,
+    });
+  }
+
+  if (redFlag.createdBy !== req.userData.userId) {
+    return res.status(403).json({
+      status: 403,
+      error: 'Access denied',
+    });
+  }
+
+  const { error } = validateRedFlag(req.body);
+  if (error) {
+    return res.status(405).json({
+      status: 405,
+      error: error.details[0].message,
+    });
+  }
+
+  if (redFlagImages === undefined) {
+    images = redFlag.images;
+  } else {
+    redFlagImages.map((i) => images.push(i.path));
+  }
+
+  if (redFlagVideos === undefined) {
+    videos = redFlag.videos;
+  } else {
+    redFlagVideos.map((v) => videos.push(v.path));
+  }
+
+  redFlag.title = req.body.title;
+  redFlag.type = req.body.type;
+  redFlag.comment = req.body.comment;
+  redFlag.location = req.body.location;
+  redFlag.images = images;
+  redFlag.videos = videos;
+
+  res.status(200).json({
+    status: 200,
+    data: [{
+      id: redFlag.id,
+      message: 'Updated red-flag record',
+    }],
+  });
+};
