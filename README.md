@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/Elvis-rugamba/broadcaster.svg?branch=integrate-travis-ci)](https://travis-ci.org/Elvis-rugamba/broadcaster)
 
+[![Coverage Status](https://coveralls.io/repos/github/Elvis-rugamba/broadcaster/badge.svg?branch=integrate-coveralls)](https://coveralls.io/github/Elvis-rugamba/broadcaster?branch=integrate-coveralls)
 
 # broadcaster
 Andela Developer Challenge Product
