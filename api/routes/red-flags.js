@@ -13,4 +13,6 @@ router.post('/', checkAuth, upload.fields([{ name: 'images', maxCount: 5 }, { na
 
 router.patch('/:redFlagId', checkAuth, upload.fields([{ name: 'images', maxCount: 5 }, { name: 'videos', maxCount: 5 }]), RedFlagsController.redFlags_update_redFlag);
 
+router.patch('/:redFlagId/:field', checkAuth, RedFlagsController.redFlags_update_redFlag_field);
+
 module.exports = router;
