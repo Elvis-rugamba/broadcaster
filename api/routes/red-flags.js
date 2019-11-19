@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.get('/', checkAuth, RedFlagsController.redFlags_get_all);
 
+router.get('/:redFlagId', checkAuth, RedFlagsController.redFlags_get_redFlag);
+
 module.exports = router;
