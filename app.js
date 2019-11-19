@@ -1,10 +1,17 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
 const userRoutes = require('./api/routes/user');
 const redFlagRoutes = require('./api/routes/red-flags.js');
+const swaggerDocument = require('./api/swagger/swagger.json');
 
 const app = express();
+
+const swaggerOptions = {
+  explorer: true,
+  customCss: '.swagger-ui .topbar { display: none }',
+};
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,6 +29,8 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/red-flags', redFlagRoutes);
+app.use('/api/v1/api-docs', swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, swaggerOptions));
 
 app.use((req, res, next) => {
   const error = new Error('Not found');
