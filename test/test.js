@@ -456,7 +456,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
   });
 
   describe('POST /api/v1/red-flags', () => {
-    it('it should create a ​red-flag​ record ', (done) => {
+    it(`it should create a red-flag​ record ${__dirname}`, (done) => {
       const dir = __dirname;
       chai.request(server)
         .post('/api/v1/red-flags')
