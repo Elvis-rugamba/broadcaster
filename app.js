@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const userRoutes = require('./api/routes/user');
+const redFlagRoutes = require('./api/routes/red-flags.js');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v1/auth', userRoutes);
+app.use('/api/v1/red-flags', redFlagRoutes);
 
 app.use((req, res, next) => {
   const error = new Error('Not found');
