@@ -456,8 +456,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
   });
 
   describe('POST /api/v1/red-flags', () => {
-    it(`it should create a red-flag​ record ${__dirname}`, (done) => {
-      const dir = __dirname;
+    it('it should create a red-flag​ record', (done) => {
       chai.request(server)
         .post('/api/v1/red-flags')
         .set('token', `Bearer ${token}`)
@@ -467,9 +466,6 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         .field('location', '50.5556, -45.5644')
         .attach(
           'images', fs.readFileSync(`${__dirname}/sample files/Fishesharvested2.jpg`), 'Fishesharvested2.jpg',
-        )
-        .attach(
-          'videos', fs.readFileSync(`${__dirname}/sample files/mov_bbb.mp4`), 'mov_bbb.mp4',
         )
         .then((res) => {
           expect(res).to.have.status(200);
