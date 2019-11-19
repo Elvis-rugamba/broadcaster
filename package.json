@@ -6,7 +6,10 @@
   "scripts": {
     "start": "nodemon server.js",
     "lint": "./node_modules/.bin/eslint server.js",
-    "test": "./node_modules/.bin/mocha"
+    "test": "nyc ./node_modules/.bin/mocha",
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "coverage": "npm run generate-lcov && npm run coveralls-coverage"
   },
   "author": "Elvis Rugamba",
   "license": "ISC",
