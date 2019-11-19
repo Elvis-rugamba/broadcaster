@@ -6,11 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "lint": "./node_modules/.bin/eslint server.js",
-    "test": "nyc ./node_modules/.bin/mocha",
-    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
-    "coveralls-coverage": "coveralls < lcov.info",
-    "codeclimate-coverage": "CODECLIMATE_REPO_TOKEN=c718edf2ca8ede2099242d90e2b1d168656664660bfb71d523ae7663e8a2cd16 codeclimate-test-reporter < lcov.info",
-    "coverage": "npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
+    "test": "./node_modules/.bin/mocha"
   },
   "author": "Elvis Rugamba",
   "license": "ISC",
