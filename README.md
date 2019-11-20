@@ -54,7 +54,7 @@
 
 - Use `http://localhost:3000/api/v1/api-docs`
 
-#### Heroku
+## Heroku
 
 - Use `https://broadcaster-api.herokuapp.com` as base url for endpoints
 
