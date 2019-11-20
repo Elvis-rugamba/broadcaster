@@ -2,17 +2,19 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "lint": "./node_modules/.bin/eslint server.js",
-    "test": "./node_modules/.bin/mocha"
+    "test": "nyc ./node_modules/.bin/mocha",
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "codeclimate-coverage": "CODECLIMATE_REPO_TOKEN=c718edf2ca8ede2099242d90e2b1d168656664660bfb71d523ae7663e8a2cd16 codeclimate-test-reporter < lcov.info",
+    "coverage": "npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
   },
   "author": "Elvis Rugamba",
   "license": "ISC",
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
     "codeclimate-test-reporter": "^0.5.1",
     "coveralls": "^3.0.7",
     "eslint": "^6.6.0",
@@ -26,6 +28,8 @@
     "@hapi/joi": "^16.1.7",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.2.0",
