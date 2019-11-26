@@ -267,7 +267,7 @@ describe('Create user account, Login a user and Check token', () => {
 
     it('it should not login a user with incorrect email', (done) => {
       const userLogin = {
-        email: 'rug@gmail.com',
+        email: 'ru@gmail.com',
         password: 'elVis123',
       };
 
