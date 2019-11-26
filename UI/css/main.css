@@ -866,6 +866,66 @@ fieldset[disabled] .btn-delete.active {
     border-color: #d43f3a;
 }
 
+.btn-edit-comment {
+    padding: 2px 4px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  color: #6F6F6F;
+  background-color: #EAEAEA;
+  border-color: #EAEAEA;
+  float: right;
+}
+.btn-edit-comment:hover,
+.btn-edit-comment:focus,
+.btn-edit-comment.focus,
+.btn-edit-comment:active,
+.btn-edit-comment.active,
+.open > .dropdown-toggle.btn-edit-comment {
+    color: #fff;
+    background-color: #66b5fb !important;
+    border: 1px solid #66b5fb !important;
+}
+.btn-edit-comment:active,
+.btn-edit-comment.active,
+.open > .dropdown-toggle.btn-primary {
+    background-image: none;
+}
+.btn-edit-comment.disabled,
+.btn-edit-comment[disabled],
+fieldset[disabled] .btn-edit-comment,
+.btn-edit-comment.disabled:hover,
+.btn-edit-comment[disabled]:hover,
+fieldset[disabled] .btn-edit-comment:hover,
+.btn-edit-comment.disabled:focus,
+.btn-edit-comment[disabled]:focus,
+fieldset[disabled] .btn-edit-comment:focus,
+.btn-edit-comment.disabled.focus,
+.btn-edit-comment[disabled].focus,
+fieldset[disabled] .btn-edit-comment.focus,
+.btn-edit-comment.disabled:active,
+.btn-edit-comment[disabled]:active,
+fieldset[disabled] .btn-edit-comment:active,
+.btn-edit-comment.disabled.active,
+.btn-edit-comment[disabled].active,
+fieldset[disabled] .btn-edit-comment.active {
+    background-color: #7fc1fc;
+    border-color: #7fc1fc;
+}
+
 .widget-shadow {
     background-color: #fff;
     box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
@@ -962,6 +1022,11 @@ fieldset[disabled] .btn-delete.active {
         /*background: #fff url("../images/bg.svg") no-repeat bottom right;
         background-size: 70%;*/
         padding: 1em 2em;
+    }
+
+    .btn-edit-comment {
+        float: none;
+        margin-left: 30px;
     }
 
     .footer {
