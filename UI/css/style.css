@@ -5,13 +5,14 @@ body, html {
 }
 
 body {
-    background: #4a00fb;
+    background: #fff;
+    /*background: #4a00fb;
     background: -moz-linear-gradient(45deg, #4a00fb 0%, #e600ff 100%);
     background: -webkit-linear-gradient(45deg, #4a00fb 0%, #e600ff 100%);
     background: linear-gradient(45deg, #4a00fb 0%, #e600ff 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#4a00fb', endColorStr='#e600ff');
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: fixed;*/
 }
 
 h1,
@@ -30,7 +31,7 @@ header {
     color: #fff;
     padding: 30px 20px 0 20px;
     height: 70px;
-    border-bottom: 3px solid #f20732;
+    border-bottom: 3px solid #f5f5f5;
 }
 
 header a {
@@ -103,7 +104,7 @@ header .highlight, header .active a, header a:hover {
 
 footer {
     padding: 20px;
-    background: #f20732;
+    background: #07038c;
     color: #fff;
     text-align: center;
 }
@@ -669,7 +670,7 @@ fieldset[disabled] .btn-delete.active {
     }
 
     .main {
-        background: #fff url("../images/bg.svg") no-repeat bottom right;
+        background: #fff;
         background-size: 70%;
     }
 

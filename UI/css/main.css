@@ -5,13 +5,14 @@ body, html {
 }
 
 body {
-    background: #07038c;
+    /*background: #07038c;
     background: -moz-linear-gradient(45deg, #07038c 0%, #f20732 100%);
     background: -webkit-linear-gradient(45deg, #07038c 0%, #f20732 100%);
     background: linear-gradient(45deg, #07038c 0%, #f20732 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#4a00fb', endColorStr='#e600ff');
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: fixed;*/
+    background: #fff;
 }
 
 h1,
@@ -29,7 +30,7 @@ header {
     background: #07038c;
     color: #fff;
     height: 70px;
-    border-bottom: 3px solid #f20732;
+    border-bottom: 3px solid #f5f5f5;
     display: grid;
     grid-template-columns: auto 40px;
     padding: 30px 20px 0 20px;
@@ -139,8 +140,7 @@ aside nav ul li a {
     font-size: .8em;
     display: block;
     padding: 1.5em 3em;
-    background-color: rgba(255, 255, 255, .35);
-    color: #000;
+    color: #777;
 }
 
 aside nav ul .divider {
@@ -225,7 +225,13 @@ main {
 .tilebox-rejected {
     border-left-color: #f5707a;
 }
+.tilebox-dark {
+    border-left-color: #777;
+}
 
+.text-dark {
+    color: #777;
+}
 .text-resolved {
     color: #4bd396;
 }
@@ -1001,11 +1007,12 @@ fieldset[disabled] .btn-edit-comment.active {
     }
 
     aside {
-        background: rgba(7, 3, 140, 0.1);
+        background: #fff;
         display: grid;
         grid-template-columns: auto;
         grid-template-rows: 150px auto;
         padding: 0;
+        border-right: 3px solid #f5f5f5;
     }
 
     .main {
@@ -1049,7 +1056,7 @@ fieldset[disabled] .btn-edit-comment.active {
 
     #avatar {
         border-radius: 50%;
-        background: #fff;
+        background: #777;
         width: 50px;
         height: 50px;
         margin: 2em auto 1em auto;
@@ -1061,18 +1068,18 @@ fieldset[disabled] .btn-edit-comment.active {
 
     figcaption {
         text-align: center;
-        color: #000;
+        color: #777;
     }
 
     aside nav ul li a:hover,
     aside nav ul li a:active {
         color: #fff;
-        background: #f20732;
+        background: #056cf2;
     }
 
     aside nav .active {
         color: #fff;
-        background: #f20732;
+        background: #056cf2;
     }
 
     aside nav .active a {
