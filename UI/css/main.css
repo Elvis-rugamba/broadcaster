@@ -953,10 +953,9 @@ fieldset[disabled] .btn-delete.active {
     background-image: none;
     border: 1px solid transparent;
     border-radius: 4px;
-  color: #6F6F6F;
-  background-color: #EAEAEA;
-  border-color: #EAEAEA;
-  float: right;
+    color: #6F6F6F;
+    background-color: #EAEAEA;
+    border-color: #EAEAEA;
 }
 .btn-edit-comment:hover,
 .btn-edit-comment:focus,
