@@ -4,6 +4,11 @@ node_js:
 
   - "node"
 
+install:
+
+  - mkdir uploads/images
+  - mkdir uploads/videos
+
 after_success: 
   
   - npm run coverage
