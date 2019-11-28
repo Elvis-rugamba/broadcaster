@@ -32,8 +32,9 @@
         <nav class="menu">
             <ul>
                 <li><a href="user-profile.html">Profile</a></li>
-                <li class="active"><a href="create-red-flag.html">Create red-flag</a></li>
+                <li class="active"><a href="create-red-flag.html">Create incident</a></li>
                 <li><a href="view-red-flags.html">View red-flags</a></li>
+                <li><a href="view-interventions.html">View interventions</a></li>
                 <li class="divider"></li>
                 <li class="hidden-md"><a href="#">Logout</a></li>
             </ul>
@@ -44,12 +45,28 @@
         <div>
             <ol class="breadcrumb">
                 <li>Home</li>
-                <li class="active">Create Red-flag</li>
+                <li class="active">Create incident</li>
             </ol>
         </div>
+        <!--<div class="alert alert-success">
+            <span class="closebtn">&times;</span> 
+            <strong>Success!</strong> is an alert box.
+        </div>
+        <div class="alert alert-info">
+            <span class="closebtn">&times;</span> 
+            <strong>Info!</strong> is an alert box.
+        </div>
+        <div class="alert alert-danger">
+            <span class="closebtn">&times;</span> 
+            <strong>Error!</strong> is an alert box.
+        </div>
+        <div class="alert alert-warning">
+            <span class="closebtn">&times;</span> 
+            <strong>Warning!</strong> is an alert box.
+        </div>-->
         <div class="forms">
             <div class="form-grids row widget-shadow">
-                <div class="form-title">Red-flag Detail:</div>
+                <div class="form-title">Incident Detail:</div>
                 <div class="form-body">
                     <form class="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
@@ -84,6 +101,7 @@
 
                         <hr>
 
+                        <button class="btn" href="user-profile.html">Cancel</button>
                         <button type="submit" name="submit" class="btn btn-primary" onclick="validateForm();">Create</button>
                     </form>
                 </div>
