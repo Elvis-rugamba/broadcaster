@@ -6,6 +6,9 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/83a178d27820916e60c8/test_coverage)](https://codeclimate.com/github/Elvis-rugamba/broadcaster/test_coverage)
 
 
+Broadcaster enables any/every citizen to bring any form of corruption to the notice of appropriate
+authorities and the general public. Users can also report on things that need government intervention
+
 ## Getting Started
 
 > [[Technologies](#technologies-used) &middot; [Testing Tools](#testing-tools) &middot; [Installations](#installations) &middot; [API Endpoints](#api-endpoints) &middot; [Tests](#tests) &middot; [Author](#author)
@@ -62,7 +65,7 @@
 
 ## Githug pages
 
-- Use ` https://elvis-rugamba.github.io/broadcaster/`
+- Use ` https://elvis-rugamba.github.io/broadcaster/UI/`
 
 ## API Endpoints
 
