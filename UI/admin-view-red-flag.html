@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="css/main.css">
+    <title>Broadcaster | Create Red-flags</title>
+</head>
+<body>
+
+<header class="top-bar">
+    <div class="brand">
+        <h1>Broadcaster</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="sign-in.html">Logout</a></li>
+        </ul>
+    </nav>
+    <img src="images/menu.svg">
+</header>
+
+<section class="main">
+
+    <aside>
+        <figure>
+            <div id="avatar"></div>
+            <figcaption>ADMIN</figcaption>
+        </figure>
+        <nav class="menu">
+            <ul>
+                <li class="active"><a href="#">View red-flag</a></li>
+                <li><a href="admin-page.html">Red-flags</a></li>
+                <li><a href="admin-view-interventions.html">Interventions</a></li>
+                <li class="divider"></li>
+                <li class="hidden-md"><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <div>
+            <ol class="breadcrumb">
+                <li>Home</li>
+                <li class="active">View Red-flag</li>
+            </ol>
+        </div>
+        <div class="forms">
+            <div class="form-grids widget-shadow">
+                <div class="form-title">Red-flag Detail:</div>
+                <div class="form-body">
+                    <div class="form-group">
+                        <h4 class="heading">Title: </h4>
+                        <p class="content">
+                            Lorem ipsum dolor sit amet
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <h4 class="heading">Type: </h4>
+                        <p class="content">
+                            red-flag
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <h4 class="heading">Comment: </h4>
+                        <p class="content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna 
+                            aliqua. Nunc pulvinar sapien et ligula ullamcorper malesuada. 
+                            Aliquam id diam maecenas ultricies mi eget mauris pharetra et. 
+                            Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque elit. 
+                            Amet volutpat consequat mauris nunc congue nisi vitae suscipit. 
+                            Neque viverra justo nec ultrices dui sapien eget.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <h4 class="heading">Location: </h4>
+                        <div class="location-map"></div>
+                        <!--<div class="location-map">
+                            <iframe src="https://www.google.com/maps/embed/v1/place?q=New+York+University&key=AIzaSyBSFRN6WWGYwmFi498qXXsD2UwkbmD74v4"
+                                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                                    style=""></iframe>
+                        </div>-->
+                    </div>
+                    <div class="form-group">
+                        <h4 class="heading">Images: </h4>
+                        <div class="img-grids">
+                            <img src="./images/2.jpg" class="img">
+                            <img src="./images/1.png" class="img">
+                            <img src="./images/2.jpg" class="img">
+                            <img src="./images/1.png" class="img">
+                            <img src="./images/1.png" class="img">
+                            <img src="./images/2.jpg" class="img">
+                            <img src="./images/1.png" class="img">
+                            <img src="./images/2.jpg" class="img">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h4 class="heading">Videos: </h4>
+                        <div class="img-grids">
+                            <video class="vid" controls>
+                                <source src="./videos/mov_bbb.mp4" type="video/mp4">
+                                <source src="./videos/mov_bbb.ogg" type="video/ogg">
+                                Your browser does not support the video tag.
+                            </video>
+                            <video class="vid" controls>
+                                <source src="./videos/movie.mp4" type="video/mp4">
+                                <source src="./videos/movie.ogg" type="video/ogg">
+                                Your browser does not support the video tag.
+                            </video>
+                            <video class="vid" controls>
+                                <source src="./videos/mov_bbb.mp4" type="video/mp4">
+                                <source src="./videos/mov_bbb.ogg" type="video/ogg">
+                                Your browser does not support the video tag.
+                            </video>
+                            <video class="vid" controls>
+                                <source src="./videos/movie.mp4" type="video/mp4">
+                                <source src="./videos/movie.ogg" type="video/ogg">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Modal -->
+        <div id="imgModal" class="modal">
+            <span class="close" id="closeImg">&times;</span>
+            <!--<span class="prev-img">&#10094;</span>-->
+            <div class="modal-content">
+                <div class="slides">
+                    <div class="number-text">1 / 4</div>
+                    <img class="content-img" id="img01">
+                </div>
+                <a class="prev-img">&#10094;</a>
+                <a class="next-img">&#10095;</a>
+                <div id="img-caption"></div>
+                <!-- Thumbnail image controls -->
+                <div class="column">
+                </div>
+            </div>
+            <!--<span class="next-img">&#10095;</span>-->
+            <!-- Next/previous controls -->
+        </div>
+        <div id="vidModal" class="modal">
+            <span class="close" id="closeVid">×</span>
+            <div class="modal-content">
+                <div class="slides">
+                    <div class="number-text">1 / 4</div>
+                    <video class="content-vid" id="vid01" controls>
+                        <source type="video/mp4">
+                        <source type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <a class="prev-vid">&#10094;</a>
+                <a class="next-vid">&#10095;</a>
+                <div id="vid-caption"></div>
+                <!-- Thumbnail image controls -->
+                <div class="column">
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Broadcaster, copyright &copy; 2019
+        </div>
+
+    </main>
+
+</section>
+
+<script src="js/main.js"></script>
+<script src="js/map.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCX1HAYwnFVGO4U2GPUSWI--Tomeiyq6wg&callback=locationMap"
+        type="text/javascript"></script>
+</body>
+</html>
