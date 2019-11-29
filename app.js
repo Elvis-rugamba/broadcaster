@@ -1,10 +1,10 @@
-const express = require('express');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const swaggerUi = require('swagger-ui-express');
-const userRoutes = require('./api/routes/user');
-const redFlagRoutes = require('./api/routes/red-flags.js');
-const swaggerDocument = require('./api/swagger/swagger.json');
+import express from 'express';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+import userRoutes from './api/routes/user';
+import redFlagRoutes from './api/routes/red-flags';
+import swaggerDocument from './api/swagger/swagger.json';
 
 const app = express();
 
@@ -47,4 +47,4 @@ app.use((error, req, res, next) => {
   });
 });
 
-module.exports = app;
+export default app;

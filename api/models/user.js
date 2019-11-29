@@ -34,22 +34,27 @@ const users = [
   },
 ];
 
-module.exports.all = users;
+class User {
+  constructor() {
+    this.users = users;
+  }
 
-module.exports.create = (user) => {
-  users.push(user);
-};
+  getAll() { return this.users; }
 
-module.exports.findById = (id) => users.find((user) => user.id === parseInt(id, 10));
+  create(user) {
+    const max = Math.max(...this.users.map((u) => u.id));
+    const id = max + 1;
+    const newUser = { id, ...user };
+    return this.users.push(newUser);
+  }
 
-module.exports.findByEmail = (val) => users.find((user) => user.email === val);
+  findById(id) { return this.users.find((user) => user.id === id); }
 
-module.exports.findByUserName = (val) => users.find((user) => user.username === val);
+  findByEmail(val) { return this.users.find((user) => user.email === val); }
 
-module.exports.findByPhoneNumber = (val) => users.find((user) => user.phoneNumber === val);
+  findByUserName(val) { return this.users.find((user) => user.username === val); }
 
-module.exports.delete = (user) => {
-  const index = users.indexOf(user);
-  users.splice(index, 1);
-  return user;
-};
+  findByPhoneNumber(val) { return this.users.find((user) => user.phoneNumber === val); }
+}
+
+export default new User();

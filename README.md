@@ -60,6 +60,10 @@
 
 - Use `https://broadcaster-api.herokuapp.com/api/v1/api-docs` for API document
 
+## Githug pages
+
+- Use ` https://elvis-rugamba.github.io/broadcaster/`
+
 ## API Endpoints
 
 | METHOD | DESCRIPTION                                     | ENDPOINTS                                  |
