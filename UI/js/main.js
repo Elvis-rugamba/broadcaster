@@ -190,7 +190,23 @@
 })();
 //End Alert Message Box
 
+//Dialog box for delete
+(function () {
+    const deleteBtn = document.querySelectorAll(".btn-delete");
 
+    if (deleteBtn) {
+        deleteBtn.forEach((deleteBtn) => {
+            deleteBtn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to delete this?')) {
+                    // Save it!
+                } else {
+                    // Do nothing!
+                }
+            });
+        });
+    }
+})();
+//End Dialog Box
 
 ////////////////
 function validateForm() {

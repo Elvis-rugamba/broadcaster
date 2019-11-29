@@ -5,13 +5,14 @@ body, html {
 }
 
 body {
-    background: #07038c;
+    /*background: #07038c;
     background: -moz-linear-gradient(45deg, #07038c 0%, #f20732 100%);
     background: -webkit-linear-gradient(45deg, #07038c 0%, #f20732 100%);
     background: linear-gradient(45deg, #07038c 0%, #f20732 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#4a00fb', endColorStr='#e600ff');
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: fixed;*/
+    background: #fff;
 }
 
 h1,
@@ -29,7 +30,7 @@ header {
     background: #07038c;
     color: #fff;
     height: 70px;
-    border-bottom: 3px solid #f20732;
+    border-bottom: 3px solid #f5f5f5;
     display: grid;
     grid-template-columns: auto 40px;
     padding: 30px 20px 0 20px;
@@ -139,8 +140,7 @@ aside nav ul li a {
     font-size: .8em;
     display: block;
     padding: 1.5em 3em;
-    background-color: rgba(255, 255, 255, .35);
-    color: #000;
+    color: #777;
 }
 
 aside nav ul .divider {
@@ -225,7 +225,13 @@ main {
 .tilebox-rejected {
     border-left-color: #f5707a;
 }
+.tilebox-dark {
+    border-left-color: #777;
+}
 
+.text-dark {
+    color: #777;
+}
 .text-resolved {
     color: #4bd396;
 }
@@ -448,6 +454,7 @@ select {
     background: #ccc;
     max-width: 100%;
     height: 180px;
+    margin-bottom: 5px;
 }
 
 .location-map iframe {
@@ -619,18 +626,41 @@ th {
     border-collapse: collapse;
     width: 100%;
 }
-.table-responsive > .table > thead > tr > th,
-.table-responsive > .table > tbody > tr > th,
-.table-responsive > .table > tfoot > tr > th,
-.table-responsive > .table > thead > tr > td,
-.table-responsive > .table > tbody > tr > td,
-.table-responsive > .table > tfoot > tr > td {
+.table-responsive thead tr { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+.table-responsive tr {
+    border-bottom: 1px solid #777;
+}
+.table-responsive td {
     padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+    border-bottom: 1px solid #eee;
     box-sizing: content-box;
     color: #777;
+    position: relative;
+    padding-left: 35%; 
 }
+.table-responsive td::before { 
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%; 
+    padding-right: 10px; 
+    white-space: nowrap;
+    font-weight: 600;
+}
+td:nth-of-type(1):before { content: "#"; }
+td:nth-of-type(2):before { content: "Title"; }
+td:nth-of-type(3):before { content: "Type"; }
+td:nth-of-type(4):before { content: "Comment"; }
+td:nth-of-type(5):before { content: "Location"; }
+td:nth-of-type(6):before { content: "Status"; }
+td:nth-of-type(7):before { content: "Created On"; }
+td:nth-of-type(8):before { content: "Actions"; }
 .table-responsive > .table > tbody > tr:hover {
     background-color: #f5f5f5;
 }
@@ -643,10 +673,50 @@ th {
     margin-bottom: 0;
 }
 
-@media screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+    }
+}
+
+@media screen and (min-width: 992px) {
     .table-responsive {
         min-height: .01%;
         overflow-x: auto;
+    }
+    .table-responsive thead tr { 
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+    .table-responsive td {
+        padding: 8px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid #ddd;
+        box-sizing: content-box;
+        color: #777;
+    }
+    td:nth-of-type(1):before { content: ""; }
+    td:nth-of-type(2):before { content: ""; }
+    td:nth-of-type(3):before { content: ""; }
+    td:nth-of-type(4):before { content: ""; }
+    td:nth-of-type(5):before { content: ""; }
+    td:nth-of-type(6):before { content: ""; }
+    td:nth-of-type(7):before { content: ""; }
+    td:nth-of-type(8):before { content: ""; }
+    .table-responsive > .table > thead > tr > th,
+    .table-responsive > .table > tbody > tr > th,
+    .table-responsive > .table > tfoot > tr > th,
+    .table-responsive > .table > thead > tr > td,
+    .table-responsive > .table > tbody > tr > td,
+    .table-responsive > .table > tfoot > tr > td {
+        padding: 8px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid #ddd;
+        box-sizing: content-box;
+        color: #777;
     }
 }
 
@@ -865,6 +935,65 @@ fieldset[disabled] .btn-delete.active {
     border-color: #d43f3a;
 }
 
+.btn-edit-comment {
+    padding: 2px 4px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #6F6F6F;
+    background-color: #EAEAEA;
+    border-color: #EAEAEA;
+}
+.btn-edit-comment:hover,
+.btn-edit-comment:focus,
+.btn-edit-comment.focus,
+.btn-edit-comment:active,
+.btn-edit-comment.active,
+.open > .dropdown-toggle.btn-edit-comment {
+    color: #fff;
+    background-color: #66b5fb !important;
+    border: 1px solid #66b5fb !important;
+}
+.btn-edit-comment:active,
+.btn-edit-comment.active,
+.open > .dropdown-toggle.btn-primary {
+    background-image: none;
+}
+.btn-edit-comment.disabled,
+.btn-edit-comment[disabled],
+fieldset[disabled] .btn-edit-comment,
+.btn-edit-comment.disabled:hover,
+.btn-edit-comment[disabled]:hover,
+fieldset[disabled] .btn-edit-comment:hover,
+.btn-edit-comment.disabled:focus,
+.btn-edit-comment[disabled]:focus,
+fieldset[disabled] .btn-edit-comment:focus,
+.btn-edit-comment.disabled.focus,
+.btn-edit-comment[disabled].focus,
+fieldset[disabled] .btn-edit-comment.focus,
+.btn-edit-comment.disabled:active,
+.btn-edit-comment[disabled]:active,
+fieldset[disabled] .btn-edit-comment:active,
+.btn-edit-comment.disabled.active,
+.btn-edit-comment[disabled].active,
+fieldset[disabled] .btn-edit-comment.active {
+    background-color: #7fc1fc;
+    border-color: #7fc1fc;
+}
+
 .widget-shadow {
     background-color: #fff;
     box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
@@ -940,11 +1069,12 @@ fieldset[disabled] .btn-delete.active {
     }
 
     aside {
-        background: rgba(7, 3, 140, 0.1);
+        background: #fff;
         display: grid;
         grid-template-columns: auto;
         grid-template-rows: 150px auto;
         padding: 0;
+        border-right: 3px solid #f5f5f5;
     }
 
     .main {
@@ -961,6 +1091,11 @@ fieldset[disabled] .btn-delete.active {
         /*background: #fff url("../images/bg.svg") no-repeat bottom right;
         background-size: 70%;*/
         padding: 1em 2em;
+    }
+
+    .btn-edit-comment {
+        float: none;
+        margin-left: 30px;
     }
 
     .footer {
@@ -983,7 +1118,7 @@ fieldset[disabled] .btn-delete.active {
 
     #avatar {
         border-radius: 50%;
-        background: #fff;
+        background: #777;
         width: 50px;
         height: 50px;
         margin: 2em auto 1em auto;
@@ -995,18 +1130,18 @@ fieldset[disabled] .btn-delete.active {
 
     figcaption {
         text-align: center;
-        color: #000;
+        color: #777;
     }
 
     aside nav ul li a:hover,
     aside nav ul li a:active {
         color: #fff;
-        background: #f20732;
+        background: #056cf2;
     }
 
     aside nav .active {
         color: #fff;
-        background: #f20732;
+        background: #056cf2;
     }
 
     aside nav .active a {
@@ -1018,7 +1153,7 @@ fieldset[disabled] .btn-delete.active {
         margin-top: 2em;
         position: relative !important;
         background: none !important;
-        width: 100% !important;
+        width: 152px !important;
     }
 
     aside ul .divider {
@@ -1127,6 +1262,13 @@ fieldset[disabled] .btn-delete.active {
 }
 
 @media only screen and (min-width: 992px) {
+    aside nav ul {
+        display: block;
+        margin-top: 2em;
+        position: relative !important;
+        background: none !important;
+        width: 100% !important;
+    }
     .top-bar {
         padding-left: 100px;
         padding-right: 100px;
