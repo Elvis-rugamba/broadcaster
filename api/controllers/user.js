@@ -60,7 +60,8 @@ class UserController {
           createdOn: new Date().toISOString(),
         };
         const id = User.create(user);
-        const token = GenerateToken.getToken(id, user);
+        user.id = id;
+        const token = GenerateToken.getToken(user);
         res.status(200).json({
           status: 200,
           message: 'User created successfully',
