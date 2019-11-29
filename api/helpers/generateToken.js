@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken';
 dotenv.config();
 
 class GenerateToken {
-  static getToken(id, user) {
+  static getToken(user) {
     const payload = {
-      userId: id,
+      userId: user.id,
       email: user.email,
       username: user.username,
       firstname: user.firstname,

@@ -89,8 +89,7 @@ class UserController {
 
     const match = await bcrypt.compare(req.body.password, user.password);
     if (match) {
-      const id = User.create(user);
-      const token = GenerateToken.getToken(id, user);
+      const token = GenerateToken.getToken(user);
       res.status(200).json({
         status: 200,
         message: 'User is successfully logged in',
