@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "rimraf dist/ && babel ./ -d dist --ignore ./node_modules,./.babelrc,./package.json,./.travis.yml,./.gitignore,./.eslintrc.json,./.uploads --copy-files",
+    "build": "rimraf dist/ && babel ./ -d dist --ignore ./node_modules,./.babelrc,./package.json,./.travis.yml,./.gitignore,./.eslintrc.json --copy-files",
     "dev": "nodemon --exec babel-node server.js",
     "start": "npm run build && node dist/server.js",
     "lint": "./node_modules/.bin/eslint server.js",
