@@ -1,20 +1,20 @@
-const express = require('express');
-const checkAuth = require('../middlewares/check-auth');
-const upload = require('../middlewares/upload');
-const RedFlagsController = require('../controllers/red-flags');
+import express from 'express';
+import checkAuth from '../middlewares/check-auth';
+import upload from '../middlewares/upload';
+import RedFlagsController from '../controllers/red-flags';
 
 const router = express.Router();
 
-router.get('/', checkAuth, RedFlagsController.redFlags_get_all);
+router.get('/', checkAuth, RedFlagsController.redFlagsGetAll);
 
-router.get('/:redFlagId', checkAuth, RedFlagsController.redFlags_get_redFlag);
+router.get('/:redFlagId', checkAuth, RedFlagsController.redFlagsGetRedFlag);
 
-router.post('/', checkAuth, upload.fields([{ name: 'images', maxCount: 5 }, { name: 'videos', maxCount: 5 }]), RedFlagsController.redFlags_create_redFlag);
+router.post('/', checkAuth, upload.fields([{ name: 'images', maxCount: 5 }, { name: 'videos', maxCount: 5 }]), RedFlagsController.redFlagsCreateRedFlag);
 
-router.patch('/:redFlagId', checkAuth, upload.fields([{ name: 'images', maxCount: 5 }, { name: 'videos', maxCount: 5 }]), RedFlagsController.redFlags_update_redFlag);
+router.patch('/:redFlagId', checkAuth, upload.fields([{ name: 'images', maxCount: 5 }, { name: 'videos', maxCount: 5 }]), RedFlagsController.redFlagsUpdateRedFlag);
 
-router.patch('/:redFlagId/:field', checkAuth, RedFlagsController.redFlags_update_redFlag_field);
+router.patch('/:redFlagId/:field', checkAuth, RedFlagsController.redFlagsUpdateRedFlagField);
 
-router.delete('/:redFlagId', checkAuth, RedFlagsController.redFlags_delete_redFlag);
+router.delete('/:redFlagId', checkAuth, RedFlagsController.redFlagsDeleteRedFlag);
 
-module.exports = router;
+export default router;

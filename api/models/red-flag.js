@@ -50,16 +50,29 @@ const redFlags = [
   },
 ];
 
-module.exports.all = redFlags;
+class RedFlag {
+  constructor() {
+    this.redFlags = redFlags;
+  }
 
-module.exports.create = (redFlag) => redFlags.push(redFlag);
+  getAll() { return this.redFlags; }
 
-module.exports.findById = (id) => redFlags.find((redFlag) => redFlag.id === parseInt(id, 10));
+  create(redFlag) {
+    const max = Math.max(...this.redFlags.map((r) => r.id));
+    const id = max + 1;
+    const newRedFlag = { id, ...redFlag };
+    return this.redFlags.push(newRedFlag);
+  }
 
-module.exports.filterByUserId = (userId) => redFlags.filter((redFlag) => redFlag.createdBy === userId);
+  findById(id) { return this.redFlags.find((redFlag) => redFlag.id === id); }
 
-module.exports.delete = (redFlag) => {
-  const index = redFlags.indexOf(redFlag);
-  redFlags.splice(index, 1);
-  return redFlag;
-};
+  filterByUserId(userId) { return this.redFlags.filter((redFlag) => redFlag.createdBy === userId); }
+
+  delete(redFlag) {
+    const index = this.redFlags.indexOf(redFlag);
+    this.redFlags.splice(index, 1);
+    return redFlag;
+  }
+}
+
+export default new RedFlag();
