@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "rm -rf dist/ && babel-node ./ -d dist --ignore ./node_modules,./.babelrc,./package.json,./.travis.yml,./.gitignore,./.eslintrc.json,./UI --copy-files",
+    "build": "rm -rf dist/ && babel ./ -d dist --ignore ./node_modules,./.babelrc,./package.json,./.travis.yml,./.gitignore,./.eslintrc.json,./UI --copy-files",
     "dev": "nodemon --exec babel-node server.js",
-    "start": "npm run build && node dist/server.js",
+    "start": "npm run build && babel-node dist/server.js",
     "lint": "./node_modules/.bin/eslint server.js",
     "test": "nyc ./node_modules/.bin/mocha --require babel-polyfill --require babel-register --exit test/test.js",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
