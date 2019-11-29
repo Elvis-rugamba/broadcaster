@@ -216,7 +216,7 @@
               "$ref": "#/definitions/SuccessResponse"
             }
           },
-          "405": {
+          "401": {
             "description": "Invalid input",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
@@ -388,12 +388,6 @@
           },
           "403": {
             "description": "Access denied other user's record",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "405": {
-            "description": "Invalid input",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
