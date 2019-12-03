@@ -274,7 +274,7 @@ a.text-danger:hover {
 }
 .form-grids {
     display: grid;
-    grid-template-rows: 60px auto;
+    grid-template-rows: 110px auto;
 }
 .form-grids .col-sm-offset-2 {
     margin-left: 7em;
@@ -284,8 +284,21 @@ a.text-danger:hover {
     padding: 1em 2em;
     background-color: #EAEAEA;
     border-bottom: 1px solid #D6D5D5;
+}
+.form-title .title {
     font-size: 1.3em;
     color: #6F6F6F;
+}
+.form-title .sort {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 1em;
+}
+.form-title .sort .label{
+    color: #6F6F6F;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 8px;
 }
 .form-body {
     padding: 1.5em 1.5em;
@@ -1235,6 +1248,19 @@ fieldset[disabled] .btn-edit-comment.active {
 
     .main p {
         font-size: 1.5em;
+    }
+
+    .form-grids {
+        grid-template-rows: 60px auto !important;
+    }
+
+    .form-title {
+        display: grid;
+        grid-template-columns: auto 250px;
+    }
+
+    .form-title .sort {
+        margin-top: 0;
     }
 
     .form-group .img-grids {
