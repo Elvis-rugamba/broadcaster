@@ -27,9 +27,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/v1/auth', userRoutes);
-app.use('/api/v1/red-flags', redFlagRoutes);
-app.use('/api/v1/api-docs', swaggerUi.serve,
+app.use('/api/v2/auth', userRoutes);
+app.use('/api/v2/red-flags', redFlagRoutes);
+app.use('/api/v2/api-docs', swaggerUi.serve,
   swaggerUi.setup(swaggerDocument, swaggerOptions));
 
 app.use((req, res, next) => {

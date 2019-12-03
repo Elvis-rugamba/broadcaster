@@ -4,11 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "rm -rf dist/ && babel ./server -d dist --ignore ./node_modules,./.babelrc,./package.json,./.travis.yml,./.gitignore,./.eslintrc.json,./UI --copy-files",
+    "build": "rm -rf dist/ && babel ./server -d dist --ignore ./v1,./node_modules,./.babelrc,./package.json,./.travis.yml,./.gitignore,./.eslintrc.json,./UI --copy-files",
     "dev": "nodemon --exec babel-node server/server.js",
     "start": "npm run build && babel-node dist/server.js",
     "lint": "./node_modules/.bin/eslint server.js",
-    "test": "nyc ./node_modules/.bin/mocha --require babel-polyfill --require babel-register --exit server/v1/test/test.js",
+    "test": "nyc ./node_modules/.bin/mocha --require babel-polyfill --require babel-register --exit server/v2/test/test.js",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "coveralls-coverage": "coveralls < lcov.info",
     "codeclimate-coverage": "CODECLIMATE_REPO_TOKEN=c718edf2ca8ede2099242d90e2b1d168656664660bfb71d523ae7663e8a2cd16 codeclimate-test-reporter < lcov.info",
@@ -17,8 +17,6 @@
   "author": "Elvis Rugamba",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
@@ -36,6 +34,8 @@
   },
   "dependencies": {
     "@hapi/joi": "^16.1.7",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
@@ -46,6 +46,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
+    "pg": "^7.14.0",
     "swagger-ui": "^3.24.3",
     "swagger-ui-express": "^4.1.2"
   }
