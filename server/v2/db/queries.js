@@ -5,7 +5,7 @@ const createUsersTable = `CREATE TABLE IF NOT EXISTS users(
     email VARCHAR(50) NOT NULL,
     phonenumber VARCHAR(20) NOT NULL,
     username VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(70) NOT NULL,
     type VARCHAR(10) NOT NULL,
     createdon TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL)`;
 
@@ -22,9 +22,22 @@ const createIncidentsTable = `CREATE TABLE IF NOT EXISTS incidents(
     status VARCHAR(20) DEFAULT 'draft' NOT NULL,
     FOREIGN KEY (createdby) REFERENCES users (id) ON UPDATE RESTRICT ON DELETE RESTRICT)`;
 
+const createTestUsersTable = `CREATE TABLE IF NOT EXISTS testusers(
+    id SERIAL PRIMARY KEY NOT NULL,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    phonenumber VARCHAR(20) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    type VARCHAR(10) NOT NULL,
+    createdon TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL)`;
+
 const dropUsersTable = 'DROP TABLE IF EXISTS users';
 
 const dropIncidentsTable = 'DROP TABLE IF EXISTS incidents';
+
+const dropTesUsersTable = 'DROP TABLE IF EXISTS testusers';
 
 const createUser = `INSERT INTO users (firstname, lastname, email, phonenumber, username, password, type) 
     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
@@ -51,6 +64,8 @@ const findIncidentByUserid = 'SELECT * FROM incidents WHERE createdby = $1';
 export default {
   createUsersTable,
   createIncidentsTable,
+  createTestUsersTable,
+  dropTesUsersTable,
   dropUsersTable,
   dropIncidentsTable,
   createUser,

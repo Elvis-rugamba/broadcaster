@@ -4,6 +4,15 @@ node_js:
 
   - "node"
 
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database testdb;' -U postgres
+
+scripts:
+ - npm run lint && npm run test
+
 after_success: 
   
   - npm run coverage
