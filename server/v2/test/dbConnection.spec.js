@@ -1,18 +1,9 @@
 import dotenv from 'dotenv';
 import chai from 'chai';
 import db from '../db/config';
-import query from '../db/queries';
 
-dotenv.config();
 const { expect } = chai;
 describe('Test Database', async () => {
-  before(
-    await db.query(query.createTestUsersTable),
-    await db.query(query.createUser),
-  );
-  after(
-    await db.query(query.dropTesUsersTable),
-  );
   it('It should return user data from testusers table', async () => {
     try {
       const dbTest = await db.queryTestConn();
