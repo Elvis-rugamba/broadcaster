@@ -52,6 +52,12 @@ const findUserByUserName = 'SELECT * FROM users WHERE username = $1';
 
 const findUserByPhoneNumber = 'SELECT * FROM users WHERE phonenumber = $1';
 
+const emailExist = 'SELECT exists(SELECT 1 FROM users WHERE email = $1)';
+
+const phoneNumberExist = 'SELECT exists(SELECT 1 FROM users WHERE phonenumber = $1)';
+
+const userNameExist = 'SELECT exists(SELECT 1 FROM users WHERE username = $1)';
+
 const createIncidents = `INSERT INTO incidents (title, type, comment, location, images, videos, createdby, status) 
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
 
@@ -74,6 +80,9 @@ export default {
   findUserByEmail,
   findUserByUserName,
   findUserByPhoneNumber,
+  emailExist,
+  userNameExist,
+  phoneNumberExist,
   createIncidents,
   findIncidents,
   findIncidentByid,

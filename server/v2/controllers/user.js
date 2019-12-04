@@ -5,36 +5,36 @@ import GenerateToken from '../helpers/generateToken';
 class UserController {
   static async userSignup(req, res) {
     try {
-      const email = User.findByEmail(req.body.email);
-      const username = User.findByUserName(req.body.username);
-      const phoneNumber = User.findByPhoneNumber(req.body.phoneNumber);
+      const email = await User.checkEmailExists(req.body.email);
+      const username = await User.checkUserNameExists(req.body.username);
+      const phoneNumber = await User.checkPhoneNumberExists(req.body.phoneNumber);
 
-      if (email) {
-        return res.status(401).json({
-          status: 401,
+      if (email.exists) {
+        return res.status(409).json({
+          status: 409,
           error: 'Email already used',
         });
       }
-      if (username) {
-        return res.status(401).json({
-          status: 401,
+      if (username.exists) {
+        return res.status(409).json({
+          status: 409,
           error: 'Username already used',
         });
       }
-      if (phoneNumber) {
-        return res.status(401).json({
-          status: 401,
+      if (phoneNumber.exists) {
+        return res.status(409).json({
+          status: 409,
           error: 'Phone number already used',
         });
       }
       if (req.body.password !== req.body.password2) {
-        return res.status(401).json({
-          status: 401,
+        return res.status(400).json({
+          status: 400,
           error: 'Password mismatch',
         });
       }
 
-      const HashedPassword = Hash.hashPassword(req.body.password);
+      const HashedPassword = await Hash.hashPassword(req.body.password);
 
       const user = {
         firstname: req.body.firstname,
@@ -58,7 +58,7 @@ class UserController {
     } catch (error) {
       res.status(500).json({
         status: 500,
-        error: error,
+        error: 'Internal Server Error!',
       });
     }
   }
