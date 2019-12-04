@@ -19,21 +19,14 @@ const pool = new Pool({
   connectionString: connectionString,
 });
 
-export default {
-  queryTestConn: async () => {
-    try {
-      const res = await pool.query('SELECT * FROM testusers');
-      return res.rows[0];
-    } catch (err) {
-      console.log(err.stack);
-    }
-  },
-  query: async (queryText, values) => {
-    try {
-      const res = await pool.query(queryText, values);
-      return res.rows[0];
-    } catch (err) {
-      console.log(err.stack);
-    }
-  },
-};
+(async () => {
+  try {
+    const res = await pool.query('SELECT * FROM testusers');
+    console.log(res.rows[0]);
+    await pool.end();
+  } catch (err) {
+    console.log(err.stack);
+  }
+})();
+
+export default { pool };
