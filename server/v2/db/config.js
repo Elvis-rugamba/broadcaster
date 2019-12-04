@@ -28,4 +28,12 @@ export default {
       console.log(err.stack);
     }
   },
+  query: async (queryText, values) => {
+    try {
+      const res = await pool.query(queryText, values);
+      return res.rows[0];
+    } catch (err) {
+      console.log(err.stack);
+    }
+  },
 };
