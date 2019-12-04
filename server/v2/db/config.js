@@ -23,27 +23,6 @@ pool.on('connect', () => {
   console.log('connected to the db');
 });
 
-/* (async () => {
-  try {
-    const res = await pool.query('SELECT * FROM testusers');
-    console.log(res.rows[0]);
-    await pool.end();
-  } catch (err) {
-    console.log(err.stack);
-  }
-})(); */
-
 export default {
   query: (queryText, params) => pool.query(queryText, params),
-  /* query(text, params) {
-    return new Promise((resolve, reject) => {
-      pool.query(text, params)
-        .then((res) => {
-          resolve(res);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }, */
 };

@@ -2,7 +2,11 @@ import db from '../db/config';
 import query from '../db/queries';
 
 class User {
-  static async getAll() {
+  constructor() {
+    db.query(query.createUsersTable);
+  }
+
+  async getAll() {
     try {
       const { rows } = await db.query(query.findUsers);
       return rows[0];
@@ -11,7 +15,7 @@ class User {
     }
   }
 
-  static async create(user) {
+  async create(user) {
     try {
       const createdUser = await db.query(query.createUser,
         [user.firstname, user.lastname, user.email, user.phonenumber, user.username, user.password, user.type]);
@@ -21,7 +25,7 @@ class User {
     }
   }
 
-  static async findById(id) {
+  async findById(id) {
     try {
       const { rows } = await db.query(query.findUserByid, [id]);
       return rows[0];
@@ -30,7 +34,7 @@ class User {
     }
   }
 
-  static async findByEmail(email) {
+  async findByEmail(email) {
     try {
       const { rows } = await db.query(query.findUserByEmail, [email]);
       return rows[0];
@@ -39,7 +43,7 @@ class User {
     }
   }
 
-  static async findByUserName(userName) {
+  async findByUserName(userName) {
     try {
       const { rows } = await db.query(query.findUserByUserName, [userName]);
       return rows[0];
@@ -48,7 +52,7 @@ class User {
     }
   }
 
-  static async findByPhoneNumber(phonenumber) {
+  async findByPhoneNumber(phonenumber) {
     try {
       const { rows } = await db.query(query.findUserByPhoneNumber, [phonenumber]);
       return rows[0];
@@ -57,7 +61,7 @@ class User {
     }
   }
 
-  static async checkEmailExists(email) {
+  async checkEmailExists(email) {
     try {
       const { rows } = await db.query(query.emailExist, [email]);
       return rows[0];
@@ -66,7 +70,7 @@ class User {
     }
   }
 
-  static async checkPhoneNumberExists(phoneNumber) {
+  async checkPhoneNumberExists(phoneNumber) {
     try {
       const { rows } = await db.query(query.phoneNumberExist, [phoneNumber]);
       return rows[0];
@@ -75,7 +79,7 @@ class User {
     }
   }
 
-  static async checkUserNameExists(userName) {
+  async checkUserNameExists(userName) {
     try {
       const { rows } = await db.query(query.userNameExist, [userName]);
       return rows[0];
@@ -85,4 +89,4 @@ class User {
   }
 }
 
-export default User;
+export default new User();

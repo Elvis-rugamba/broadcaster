@@ -1,9 +1,9 @@
 import db from '../db/config';
 import query from '../db/queries';
 
-const dropTable = async (user) => {
+const dropTable = async () => {
   try {
-    await db.query(query.dropTesUsersTable);
+    await db.query(query.dropUsersTable);
   } catch (error) {
     console.log(error);
   }

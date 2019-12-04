@@ -8,13 +8,12 @@
     "dev": "nodemon --exec babel-node server/server.js",
     "start": "npm run build && babel-node dist/server.js",
     "lint": "./node_modules/.bin/eslint server.js",
-    "test": "cross-env NODE_ENV=testing nyc ./node_modules/.bin/mocha --require babel-polyfill --require babel-register --exit server/v2/test/*test.js",
+    "test": "cross-env NODE_ENV=testing nyc ./node_modules/.bin/mocha --require babel-polyfill --require babel-register --exit server/v2/test/*spec.js && cross-env NODE_ENV=testing npm run drop",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "coveralls-coverage": "coveralls < lcov.info",
     "codeclimate-coverage": "CODECLIMATE_REPO_TOKEN=c718edf2ca8ede2099242d90e2b1d168656664660bfb71d523ae7663e8a2cd16 codeclimate-test-reporter < lcov.info",
     "coverage": "npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage",
-    "drop": "node --require babel-polyfill --require babel-register server/v2/models/dropTestTable",
-    "create": "node --require babel-polyfill --require babel-register server/v2/models/createTestTable"
+    "drop": "node --require babel-polyfill --require babel-register server/v2/models/dropTestTable"
   },
   "author": "Elvis Rugamba",
   "license": "ISC",

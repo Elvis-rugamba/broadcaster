@@ -66,8 +66,8 @@ class UserValidation {
 
     const { error } = schema.validate(req.body);
     if (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(401).json({
+        status: 401,
         error: error.details[0].message,
       });
     }
