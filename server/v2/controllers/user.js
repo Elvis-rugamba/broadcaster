@@ -27,12 +27,6 @@ class UserController {
           error: 'Phone number already used',
         });
       }
-      if (req.body.password !== req.body.password2) {
-        return res.status(401).json({
-          status: 401,
-          error: 'Password mismatch',
-        });
-      }
 
       const HashedPassword = await Hash.hashPassword(req.body.password);
 

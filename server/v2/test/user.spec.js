@@ -3,6 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../server';
 import userData from './data/userData';
+import db from '../db/config';
 
 dotenv.config();
 
@@ -34,11 +35,11 @@ describe('POST /api/v2/auth/signup', () => {
       .post('/api/v2/auth/signup')
       .send(userData.missingFields)
       .then((res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(401);
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('status');
         expect(res.body).to.have.property('error');
-        expect(res.body.status).to.be.eql(400);
+        expect(res.body.status).to.be.eql(401);
         done();
       })
       .catch((err) => done(err));
@@ -47,7 +48,7 @@ describe('POST /api/v2/auth/signup', () => {
   it('it should not create a user account with invalid email', (done) => {
     chai.request(server)
       .post('/api/v2/auth/signup')
-      .send(userData.userRegister)
+      .send(userData.invalidEmail)
       .then((res) => {
         expect(res).to.have.status(401);
         expect(res.body).to.be.an('object');
@@ -109,13 +110,41 @@ describe('POST /api/v2/auth/signup', () => {
       .post('/api/v2/auth/signup')
       .send(userData.noConfirmPassword)
       .then((res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(401);
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('status');
         expect(res.body).to.have.property('error');
-        expect(res.body.status).to.be.eql(400);
+        expect(res.body.status).to.be.eql(401);
         done();
       })
       .catch((err) => done(err));
+  });
+});
+
+describe('Not Found', async () => {
+  it('it should return 404', (done) => {
+    chai.request(server)
+      .post('/api/v2/auth/sign')
+      .send(userData.noConfirmPassword)
+      .then((res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('status');
+        expect(res.body).to.have.property('error');
+        expect(res.body.status).to.be.eql(404);
+        done();
+      })
+      .catch((err) => done(err));
+  });
+});
+
+describe('Throw Error', () => {
+  it('it should return 500', async () => {
+    try {
+      const dbTest = await db.queryTestConn('unkown');
+      expect(dbTest).to.throw();
+    } catch (error) {
+      expect(() => { throw error; }).to.throw();
+    }
   });
 });

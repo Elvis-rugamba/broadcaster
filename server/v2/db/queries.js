@@ -1,3 +1,16 @@
+const testConn = 'SELECT * FROM testusers';
+
+const createTestUsersTable = `CREATE TABLE IF NOT EXISTS testusers(
+    id SERIAL PRIMARY KEY NOT NULL,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    phonenumber VARCHAR(20) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(70) NOT NULL,
+    type VARCHAR(10) NOT NULL,
+    createdon TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL)`;
+
 const createUsersTable = `CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY NOT NULL,
     firstname VARCHAR(50) NOT NULL,
@@ -68,6 +81,8 @@ const findIncidentByid = 'SELECT * FROM incidents WHERE id = $1';
 const findIncidentByUserid = 'SELECT * FROM incidents WHERE createdby = $1';
 
 export default {
+  testConn,
+  createTestUsersTable,
   createUsersTable,
   createIncidentsTable,
   createTestUsersTable,

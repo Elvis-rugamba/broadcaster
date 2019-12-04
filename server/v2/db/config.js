@@ -24,5 +24,13 @@ pool.on('connect', () => {
 });
 
 export default {
+  queryTestConn: async () => {
+    try {
+      const res = await pool.query(query.testConn);
+      return res.rows[0];
+    } catch (err) {
+      console.log(err.stack);
+    }
+  },
   query: (queryText, params) => pool.query(queryText, params),
 };

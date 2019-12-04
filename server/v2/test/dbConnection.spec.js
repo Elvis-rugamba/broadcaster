@@ -1,4 +1,3 @@
-import dotenv from 'dotenv';
 import chai from 'chai';
 import db from '../db/config';
 
