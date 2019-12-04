@@ -8,7 +8,8 @@ const { expect } = chai;
 describe('Test Database', () => {
   it('It should return user data from testusers table', async () => {
     const dbTest = await db.queryTestConn();
-    console.log(dbTest);
+    expect(process.env.NODE_ENV).to.equal('testing');
+    expect(dbTest).to.be.an('object');
     expect(dbTest).to.have.property('id');
   });
 });
