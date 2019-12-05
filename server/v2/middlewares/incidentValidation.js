@@ -1,7 +1,7 @@
 import Joi from '@hapi/joi';
 
-class RedFlagValidation {
-  static validateRedFlag(req, res, next) {
+class IncidentValidation {
+  static validateIncident(req, res, next) {
     const schema = Joi.object({
       title: Joi.string()
         .min(3)
@@ -24,8 +24,8 @@ class RedFlagValidation {
 
     const { error } = schema.validate(req.body);
     if (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(401).json({
+        status: 401,
         error: error.details[0].message,
       });
     }
@@ -43,8 +43,8 @@ class RedFlagValidation {
 
     const { error } = schema.validate(req.body);
     if (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(401).json({
+        status: 401,
         error: error.details[0].message,
       });
     }
@@ -71,8 +71,8 @@ class RedFlagValidation {
 
     const { error } = schema.validate(req.body);
     if (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(401).json({
+        status: 401,
         error: error.details[0].message,
       });
     }
@@ -81,4 +81,4 @@ class RedFlagValidation {
   }
 }
 
-export default RedFlagValidation;
+export default IncidentValidation;
