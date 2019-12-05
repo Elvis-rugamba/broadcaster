@@ -39,7 +39,9 @@ class UserController {
       res.status(201).json({
         status: 201,
         message: 'User created successfully',
-        data: { token: token },
+        data: {
+          token: token,
+        },
       });
     } catch (error) {
       res.status(500).json({
