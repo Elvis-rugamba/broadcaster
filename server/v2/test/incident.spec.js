@@ -4,8 +4,6 @@ import chaiHttp from 'chai-http';
 import fs from 'fs';
 import server from '../../server';
 import userData from './data/userData';
-import incidentData from './data/incidentData';
-import GenerateToken from '../helpers/generateToken';
 
 
 dotenv.config();
