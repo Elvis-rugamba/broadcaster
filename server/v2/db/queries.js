@@ -35,11 +35,11 @@ const createIncidentsTable = `CREATE TABLE IF NOT EXISTS incidents(
     status VARCHAR(20) DEFAULT 'draft' NOT NULL,
     FOREIGN KEY (createdby) REFERENCES users (id) ON UPDATE RESTRICT ON DELETE RESTRICT)`;
 
-const dropUsersTable = 'DROP TABLE IF EXISTS users';
+const dropUsersTable = 'DROP TABLE IF EXISTS users CASCADE';
 
-const dropIncidentsTable = 'DROP TABLE IF EXISTS incidents';
+const dropIncidentsTable = 'DROP TABLE IF EXISTS incidents CASCADE';
 
-const dropTesUsersTable = 'DROP TABLE IF EXISTS testusers';
+const dropTesUsersTable = 'DROP TABLE IF EXISTS testusers CASCADE';
 
 const createUser = `INSERT INTO users (firstname, lastname, email, phonenumber, username, password, type) 
     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;

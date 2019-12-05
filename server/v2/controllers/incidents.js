@@ -11,8 +11,8 @@ class UserController {
     try {
       const createdIncident = await Incident.create(req, images, videos);
       console.log(createdIncident);
-      res.status(200).json({
-        status: 200,
+      res.status(201).json({
+        status: 201,
         data: [{
           id: createdIncident.id,
           message: 'Created red-flag record',

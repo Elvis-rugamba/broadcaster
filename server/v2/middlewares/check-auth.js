@@ -17,6 +17,7 @@ export default async (req, res, next) => {
     const decoded = await jwt.verify(token, process.env.JWT_KEY);
     const { rows } = await db.query(query.findUserByid, [decoded.userId]);
     if (!rows[0]) {
+      console.log(`${token} == i got you == ${decoded.id}`);
       return res.status(401).json({
         status: 401,
         error: 'Auth failed',
