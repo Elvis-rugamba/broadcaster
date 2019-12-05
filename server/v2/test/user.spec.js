@@ -30,21 +30,6 @@ describe('POST /api/v2/auth/signup', () => {
       .catch((err) => done(err));
   });
 
-  it('it should not create a user account with missing required fields', (done) => {
-    chai.request(server)
-      .post('/api/v2/auth/signup')
-      .send(userData.missingFields)
-      .then((res) => {
-        expect(res).to.have.status(401);
-        expect(res.body).to.be.an('object');
-        expect(res.body).to.have.property('status');
-        expect(res.body).to.have.property('error');
-        expect(res.body.status).to.be.eql(401);
-        done();
-      })
-      .catch((err) => done(err));
-  });
-
   it('it should not create a user account with invalid email', (done) => {
     chai.request(server)
       .post('/api/v2/auth/signup')
@@ -100,21 +85,6 @@ describe('POST /api/v2/auth/signup', () => {
         expect(res.body).to.have.property('status');
         expect(res.body).to.have.property('error');
         expect(res.body.status).to.be.eql(409);
-        done();
-      })
-      .catch((err) => done(err));
-  });
-
-  it('it should not create a user account without confirming password', (done) => {
-    chai.request(server)
-      .post('/api/v2/auth/signup')
-      .send(userData.noConfirmPassword)
-      .then((res) => {
-        expect(res).to.have.status(401);
-        expect(res.body).to.be.an('object');
-        expect(res.body).to.have.property('status');
-        expect(res.body).to.have.property('error');
-        expect(res.body.status).to.be.eql(401);
         done();
       })
       .catch((err) => done(err));
