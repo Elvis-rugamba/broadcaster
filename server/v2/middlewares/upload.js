@@ -3,9 +3,9 @@ import multer from 'multer';
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname === 'images') {
-      cb(null, 'server/v1/uploads/images/');
+      cb(null, './server/v2/uploads/images/');
     } else {
-      cb(null, 'server/v1/uploads/videos/');
+      cb(null, './server/v2/uploads/videos/');
     }
   },
   filename: (req, file, cb) => {
@@ -32,7 +32,7 @@ const fileFilter = (req, file, cb) => {
     }
   } else {
     const error = new Error('Invalid field name');
-    error.status = 401;
+    error.status = 400;
     cb(error, false);
   }
 };

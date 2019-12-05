@@ -6,7 +6,7 @@ const userRegister = {
   username: 'rugamba',
   password: 'Rug123',
   password2: 'Rug123',
-  type: 'admin',
+  type: 'user',
 };
 
 const missingFields = {};
@@ -76,6 +76,18 @@ const invalidLogin = {
   password: 'elVis123',
 };
 
+const payload = {
+  id: 2,
+  firstname: 'Elvis',
+  lastname: 'Rugamba',
+  email: 'rugamba@gmail.com',
+  phoneNumber: '0789279777',
+  username: 'rugamba',
+  password: 'Rug123',
+  password2: 'Rug123',
+  type: 'user',
+};
+
 export default {
   userRegister,
   missingFields,
@@ -86,4 +98,5 @@ export default {
   noConfirmPassword,
   userLogin,
   invalidLogin,
+  payload,
 };

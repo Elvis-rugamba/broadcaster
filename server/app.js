@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import userRoutes from './v2/routes/user';
+import incidentsRoutes from './v2/routes/incidents';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v2/auth', userRoutes);
+app.use('/api/v2/red-flags', incidentsRoutes);
 
 app.use((req, res, next) => {
   const error = new Error('Not found');

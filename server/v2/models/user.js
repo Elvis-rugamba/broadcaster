@@ -2,11 +2,6 @@ import db from '../db/config';
 import query from '../db/queries';
 
 class User {
-  constructor() {
-    db.query(query.createUsersTable);
-    db.query(query.createTestUsersTable);
-  }
-
   async create({
     firstname, lastname, email, phoneNumber, username, password, type,
   }) {

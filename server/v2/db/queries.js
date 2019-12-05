@@ -1,6 +1,6 @@
-const testConn = 'SELECT * FROM testusers';
+const testConn = 'SELECT * FROM users';
 
-const createTestUsersTable = `CREATE TABLE IF NOT EXISTS testusers(
+const createTestUsersTable = `CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY NOT NULL,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
@@ -61,7 +61,7 @@ const phoneNumberExist = 'SELECT exists(SELECT 1 FROM users WHERE phonenumber = 
 const userNameExist = 'SELECT exists(SELECT 1 FROM users WHERE username = $1)';
 
 const createIncidents = `INSERT INTO incidents (title, type, comment, location, images, videos, createdby, status) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`;
 
 const findIncidents = 'SELECT * FROM incidents';
 
