@@ -7,10 +7,12 @@ class Incident {
     db.query(query.createTestUsersTable);
   }
 
-  async create(req, images, videos) {
+  async create({
+    title, type, comment, location,
+  }, { userId }, images, videos) {
     try {
       const createdIncident = await db.query(query.createIncidents,
-        [req.body.title, req.body.type, req.body.comment, req.body.location, images, videos, req.userData.userId, 'draft']);
+        [title, type, comment, location, images, videos, userId, 'draft']);
       return createdIncident.rows[0];
     } catch (error) {
       console.log(error);

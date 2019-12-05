@@ -12,13 +12,7 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-// let token;
-
 describe('POST /api/v2/red-flags', () => {
-  before((done) => {
-    // token = GenerateToken.getToken(userData.payload);
-    done();
-  });
   it('it should create a red-flag​ record', (done) => {
     chai.request(server)
       .post('/api/v2/auth/signin')

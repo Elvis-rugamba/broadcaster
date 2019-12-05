@@ -32,7 +32,7 @@ const fileFilter = (req, file, cb) => {
     }
   } else {
     const error = new Error('Invalid field name');
-    error.status = 401;
+    error.status = 400;
     cb(error, false);
   }
 };

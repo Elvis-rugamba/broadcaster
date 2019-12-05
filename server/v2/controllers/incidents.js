@@ -6,11 +6,12 @@ class UserController {
     const redFlagVideos = req.files.videos;
     const images = [];
     const videos = [];
+
     if (redFlagImages !== undefined) redFlagImages.map((i) => images.push(i.path));
     if (redFlagVideos !== undefined) redFlagVideos.map((v) => videos.push(v.path));
+
     try {
-      const createdIncident = await Incident.create(req, images, videos);
-      console.log(createdIncident);
+      const createdIncident = await Incident.create(req.body, req.userData, images, videos);
       res.status(201).json({
         status: 201,
         data: [{
