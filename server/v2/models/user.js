@@ -8,11 +8,11 @@ class User {
   }
 
   async create({
-    firstname, lastname, email, phoneNumber, username, hashedPassword, type,
+    firstname, lastname, email, phoneNumber, username, password, type,
   }) {
     try {
       const createdUser = await db.query(query.createUser,
-        [firstname, lastname, email, phoneNumber, username, hashedPassword, type]);
+        [firstname, lastname, email, phoneNumber, username, password, type]);
       return createdUser;
     } catch (error) {
       console.log(error);

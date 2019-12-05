@@ -30,7 +30,7 @@ class UserController {
 
       const hashedPassword = await Hash.hashPassword(req.body.password);
 
-      req.body.hashPassword = hashedPassword;
+      req.body.password = hashedPassword;
 
       const createdUser = await User.create(req.body);
 
