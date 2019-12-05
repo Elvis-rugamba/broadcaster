@@ -7,10 +7,12 @@ class User {
     db.query(query.createTestUsersTable);
   }
 
-  async create(user) {
+  async create({
+    firstname, lastname, email, phoneNumber, username, password, type,
+  }) {
     try {
       const createdUser = await db.query(query.createUser,
-        [user.firstname, user.lastname, user.email, user.phonenumber, user.username, user.password, user.type]);
+        [firstname, lastname, email, phoneNumber, username, password, type]);
       return createdUser;
     } catch (error) {
       console.log(error);

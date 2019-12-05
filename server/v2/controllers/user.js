@@ -28,26 +28,20 @@ class UserController {
         });
       }
 
-      const HashedPassword = await Hash.hashPassword(req.body.password);
+      const hashedPassword = await Hash.hashPassword(req.body.password);
 
-      const user = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        phonenumber: req.body.phoneNumber,
-        username: req.body.username,
-        password: HashedPassword,
-        type: req.body.type,
-      };
+      req.body.password = hashedPassword;
 
-      const createdUser = await User.create(user);
+      const createdUser = await User.create(req.body);
 
       const token = GenerateToken.getToken(createdUser);
 
       res.status(201).json({
         status: 201,
         message: 'User created successfully',
-        data: { token: token },
+        data: {
+          token: token,
+        },
       });
     } catch (error) {
       console.log(error);
@@ -74,7 +68,9 @@ class UserController {
         res.status(200).json({
           status: 200,
           message: 'User is successfully logged in',
-          data: { token: token },
+          data: {
+            token: token,
+          },
         });
       } else {
         return res.status(401).json({

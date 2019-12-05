@@ -1,10 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import swaggerUi from 'swagger-ui-express';
 import userRoutes from './v2/routes/user';
 import incidentsRoutes from './v2/routes/incidents';
-// import swaggerDocument from './v1/swagger/swagger.json';
 
 const app = express();
 
@@ -29,8 +27,6 @@ app.use((req, res, next) => {
 
 app.use('/api/v2/auth', userRoutes);
 app.use('/api/v2/red-flags', incidentsRoutes);
-/* app.use('/api/v2/api-docs', swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, swaggerOptions)); */
 
 app.use((req, res, next) => {
   const error = new Error('Not found');
