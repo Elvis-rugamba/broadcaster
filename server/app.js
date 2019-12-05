@@ -6,11 +6,6 @@ import incidentsRoutes from './v2/routes/incidents';
 
 const app = express();
 
-const swaggerOptions = {
-  explorer: true,
-  customCss: '.swagger-ui .topbar { display: none }',
-};
-
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

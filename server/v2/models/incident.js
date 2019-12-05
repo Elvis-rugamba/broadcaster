@@ -2,11 +2,6 @@ import db from '../db/config';
 import query from '../db/queries';
 
 class Incident {
-  constructor() {
-    db.query(query.createIncidentsTable);
-    db.query(query.createTestUsersTable);
-  }
-
   async create({
     title, type, comment, location,
   }, { userId }, images, videos) {

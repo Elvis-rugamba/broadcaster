@@ -8,7 +8,7 @@ dotenv.config();
 export default async (req, res, next) => {
   const [, token] = req.headers.token.split(' ');
   if (!token) {
-    return res.status(401).json({
+    return res.status(400).json({
       status: 400,
       error: 'Token not provided',
     });
@@ -17,18 +17,17 @@ export default async (req, res, next) => {
     const decoded = await jwt.verify(token, process.env.JWT_KEY);
     const { rows } = await db.query(query.findUserByid, [decoded.userId]);
     if (!rows[0]) {
-      console.log(`${token} == i got you == ${decoded.id}`);
-      return res.status(401).json({
-        status: 401,
-        error: 'Auth failed',
+      return res.status(403).json({
+        status: 403,
+        error: 'Invalid token, you are not allowed to access resources',
       });
     }
     req.userData = decoded;
     next();
   } catch (error) {
-    return res.status(401).json({
-      status: 401,
-      error: 'Auth failed',
+    return res.status(403).json({
+      status: 403,
+      error: 'Invalid token, you are not allowed to access resources',
     });
   }
 };

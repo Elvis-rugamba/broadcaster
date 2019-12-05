@@ -62,11 +62,11 @@ describe('POST /api/v2/red-flags', () => {
         'videos', fs.readFileSync(`${__dirname}/data/sample files/mov_bbb.mp4`), 'mov_bbb.mp4',
       )
       .then((res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(403);
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('status');
         expect(res.body).to.have.property('error');
-        expect(res.body.status).to.be.eql(401);
+        expect(res.body.status).to.be.eql(403);
         done();
       })
       .catch((err) => done(err));
