@@ -44,6 +44,42 @@ class UserController {
         },
       });
     } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        status: 500,
+        error: 'Internal Server Error!',
+      });
+    }
+  }
+
+  static async userSignin(req, res) {
+    try {
+      const user = await User.findByEmail(req.body.email);
+      if (!user) {
+        return res.status(401).json({
+          status: 401,
+          error: 'Incorrect Email or Password',
+        });
+      }
+
+      const match = await Hash.match(req.body.password, user.password);
+      if (match) {
+        const token = GenerateToken.getToken(user);
+        res.status(200).json({
+          status: 200,
+          message: 'User is successfully logged in',
+          data: {
+            token: token,
+          },
+        });
+      } else {
+        return res.status(401).json({
+          status: 401,
+          error: 'Incorrect Email or Password',
+        });
+      }
+    } catch (error) {
+      console.error(error);
       res.status(500).json({
         status: 500,
         error: 'Internal Server Error!',

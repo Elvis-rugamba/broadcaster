@@ -51,6 +51,27 @@ class UserValidation {
 
     next();
   }
+
+  static validateLogin(req, res, next) {
+    const schema = Joi.object({
+      email: Joi.string()
+        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+        .required(),
+
+      password: Joi.any()
+        .required(),
+    });
+
+    const { error } = schema.validate(req.body);
+    if (error) {
+      return res.status(401).json({
+        status: 401,
+        error: error.details[0].message,
+      });
+    }
+
+    next();
+  }
 }
 
 export default UserValidation;

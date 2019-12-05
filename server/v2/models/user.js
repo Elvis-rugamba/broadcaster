@@ -45,6 +45,16 @@ class User {
       console.log(error);
     }
   }
+
+  async findByEmail(email) {
+    try {
+      const { rows } = await db.query(query.findUserByEmail, [email]);
+      console.log(rows);
+      return rows[0];
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default new User();

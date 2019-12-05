@@ -9,10 +9,7 @@ const userRegister = {
   type: 'admin',
 };
 
-const missingFields = {
-  firstname: 'Elvis',
-  lastname: 'Rugamba',
-};
+const missingFields = {};
 
 const invalidEmail = {
   firstname: 'Elvis',
@@ -70,7 +67,12 @@ const noConfirmPassword = {
 };
 
 const userLogin = {
-  email: 'elvisrugamba@gmail.com',
+  email: 'rugamba@gmail.com',
+  password: 'Rug123',
+};
+
+const invalidLogin = {
+  email: 'elvis@gmail.com',
   password: 'elVis123',
 };
 
@@ -83,4 +85,5 @@ export default {
   existingPhoneNumber,
   noConfirmPassword,
   userLogin,
+  invalidLogin,
 };
