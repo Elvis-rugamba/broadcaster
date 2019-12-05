@@ -1,6 +1,6 @@
-const testConn = 'SELECT * FROM testusers';
+const testConn = 'SELECT * FROM users';
 
-const createTestUsersTable = `CREATE TABLE IF NOT EXISTS testusers(
+const createTestUsersTable = `CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY NOT NULL,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,

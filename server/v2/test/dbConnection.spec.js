@@ -3,7 +3,7 @@ import db from '../db/config';
 
 const { expect } = chai;
 describe('Test Database', async () => {
-  it('It should return user data from testusers table', async () => {
+  it('It should return user data from users table', async () => {
     try {
       const dbTest = await db.queryTestConn();
       expect(process.env.NODE_ENV).to.equal('testing');
