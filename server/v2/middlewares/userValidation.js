@@ -32,10 +32,8 @@ class UserValidation {
         .pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/),
 
       password2: Joi.string()
-        .min(6)
-        .max(64)
-        .required()
-        .pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/),
+        .valid(Joi.ref('password'))
+        .required(),
 
       type: Joi.string()
         .min(3)
@@ -45,29 +43,8 @@ class UserValidation {
 
     const { error } = schema.validate(req.body);
     if (error) {
-      return res.status(400).json({
-        status: 400,
-        error: error.details[0].message,
-      });
-    }
-
-    next();
-  }
-
-  static validateLogin(req, res, next) {
-    const schema = Joi.object({
-      email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
-        .required(),
-
-      password: Joi.string()
-        .required(),
-    });
-
-    const { error } = schema.validate(req.body);
-    if (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(401).json({
+        status: 401,
         error: error.details[0].message,
       });
     }

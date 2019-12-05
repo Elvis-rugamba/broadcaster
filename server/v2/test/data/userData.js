@@ -14,6 +14,17 @@ const missingFields = {
   lastname: 'Rugamba',
 };
 
+const invalidEmail = {
+  firstname: 'Elvis',
+  lastname: 'Rugamba',
+  email: 'rugambagmail.com',
+  phoneNumber: '0789279777',
+  username: 'rugamba',
+  password: 'Rug123',
+  password2: 'Rug123',
+  type: 'admin',
+};
+
 const existingEmail = {
   firstname: 'Elvis',
   lastname: 'Rugamba',
@@ -66,6 +77,7 @@ const userLogin = {
 export default {
   userRegister,
   missingFields,
+  invalidEmail,
   existingEmail,
   existingUserName,
   existingPhoneNumber,

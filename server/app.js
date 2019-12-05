@@ -1,17 +1,9 @@
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import swaggerUi from 'swagger-ui-express';
-import userRoutes from './v1/routes/user';
-import redFlagRoutes from './v1/routes/red-flags';
-import swaggerDocument from './v1/swagger/swagger.json';
+import userRoutes from './v2/routes/user';
 
 const app = express();
-
-const swaggerOptions = {
-  explorer: true,
-  customCss: '.swagger-ui .topbar { display: none }',
-};
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,9 +20,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v2/auth', userRoutes);
-app.use('/api/v2/red-flags', redFlagRoutes);
-app.use('/api/v2/api-docs', swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, swaggerOptions));
 
 app.use((req, res, next) => {
   const error = new Error('Not found');

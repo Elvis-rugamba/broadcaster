@@ -1,5 +1,6 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
+import query from './queries';
 
 dotenv.config();
 
@@ -19,21 +20,18 @@ const pool = new Pool({
   connectionString: connectionString,
 });
 
+pool.on('connect', () => {
+  console.log('connected to the db');
+});
+
 export default {
   queryTestConn: async () => {
     try {
-      const res = await pool.query('SELECT * FROM testusers');
+      const res = await pool.query(query.testConn);
       return res.rows[0];
     } catch (err) {
       console.log(err.stack);
     }
   },
-  query: async (queryText, values) => {
-    try {
-      const res = await pool.query(queryText, values);
-      return res.rows[0];
-    } catch (err) {
-      console.log(err.stack);
-    }
-  },
+  query: (queryText, params) => pool.query(queryText, params),
 };
