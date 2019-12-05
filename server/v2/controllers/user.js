@@ -28,19 +28,11 @@ class UserController {
         });
       }
 
-      const HashedPassword = await Hash.hashPassword(req.body.password);
+      const hashedPassword = await Hash.hashPassword(req.body.password);
 
-      const user = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        phonenumber: req.body.phoneNumber,
-        username: req.body.username,
-        password: HashedPassword,
-        type: req.body.type,
-      };
+      req.body.hashPassword = hashedPassword;
 
-      const createdUser = await User.create(user);
+      const createdUser = await User.create(req.body);
 
       const token = GenerateToken.getToken(createdUser);
 
