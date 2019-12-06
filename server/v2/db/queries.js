@@ -69,6 +69,8 @@ const findIncidentByid = 'SELECT * FROM incidents WHERE id = $1';
 
 const findIncidentByUserid = 'SELECT * FROM incidents WHERE createdby = $1';
 
+const findIncidentByUseridAndId = 'SELECT * FROM incidents WHERE createdby = $1 AND id = $2';
+
 export default {
   testConn,
   createTestUsersTable,
@@ -90,4 +92,5 @@ export default {
   findIncidents,
   findIncidentByid,
   findIncidentByUserid,
+  findIncidentByUseridAndId,
 };

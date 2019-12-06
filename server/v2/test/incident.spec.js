@@ -168,4 +168,127 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         });
     });
   });
+
+  describe('GET /api/v2/red-flags/rdflag-id', () => {
+    it('it should fetch specific ​red-flag ​records', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags/1')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(200);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('data');
+              expect(res.body.status).to.be.eql(200);
+              expect(res.body.data).to.be.an('object');
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not fetch specific ​red-flag ​records without being authenticated', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags')
+            .set('token', 'Bearer uknown/token')
+            .then((res) => {
+              expect(res).to.have.status(403);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(403);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not fetch the ​red-flag​ record with invalid ID', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags/ui')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(401);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(401);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not fetch the ​red-flag​ record with unkown ID', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags/12')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(404);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(404);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not fetch the ​red-flag​ record with ID thati is not in range of integer', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags/12111111111')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(500);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(500);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not fetch the other user\'s ​red-flag​ record', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags/2')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(404);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(404);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+  });
 });

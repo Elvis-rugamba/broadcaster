@@ -4,6 +4,7 @@ import chaiHttp from 'chai-http';
 import server from '../../server';
 import userData from './data/userData';
 import db from '../db/config';
+import query from '../db/queries';
 
 dotenv.config();
 
@@ -154,16 +155,5 @@ describe('Not Found', async () => {
         done();
       })
       .catch((err) => done(err));
-  });
-});
-
-describe('Throw Error', () => {
-  it('it should return 500', async () => {
-    try {
-      const dbTest = await db.queryTestConn('unkown');
-      expect(dbTest).to.throw();
-    } catch (error) {
-      expect(() => { throw error; }).to.throw();
-    }
   });
 });

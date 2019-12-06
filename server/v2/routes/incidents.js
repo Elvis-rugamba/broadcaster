@@ -11,4 +11,6 @@ router.post('/', checkAuth, upload.fields([{ name: 'images', maxCount: 5 }, { na
 
 router.get('/', checkAuth, IncidentsController.getAllIncidents);
 
+router.get('/:redFlagId', checkAuth, IncidentValidation.incidentId, IncidentsController.getSpecificInident);
+
 export default router;
