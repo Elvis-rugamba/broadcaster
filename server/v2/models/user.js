@@ -5,50 +5,30 @@ class User {
   async create({
     firstname, lastname, email, phoneNumber, username, password, type,
   }) {
-    try {
-      const createdUser = await db.query(query.createUser,
-        [firstname, lastname, email, phoneNumber, username, password, type]);
-      return createdUser;
-    } catch (error) {
-      console.log(error);
-    }
+    const createdUser = await db.query(query.createUser,
+      [firstname, lastname, email, phoneNumber, username, password, type]);
+    return createdUser;
   }
 
   async checkEmailExists(email) {
-    try {
-      const { rows } = await db.query(query.emailExist, [email]);
-      return rows[0];
-    } catch (error) {
-      console.log(error);
-    }
+    const { rows } = await db.query(query.emailExist, [email]);
+    return rows[0];
   }
 
   async checkPhoneNumberExists(phoneNumber) {
-    try {
-      const { rows } = await db.query(query.phoneNumberExist, [phoneNumber]);
-      return rows[0];
-    } catch (error) {
-      console.log(error);
-    }
+    const { rows } = await db.query(query.phoneNumberExist, [phoneNumber]);
+    return rows[0];
   }
 
   async checkUserNameExists(userName) {
-    try {
-      const { rows } = await db.query(query.userNameExist, [userName]);
-      return rows[0];
-    } catch (error) {
-      console.log(error);
-    }
+    const { rows } = await db.query(query.userNameExist, [userName]);
+    return rows[0];
   }
 
   async findByEmail(email) {
-    try {
-      const { rows } = await db.query(query.findUserByEmail, [email]);
-      console.log(rows);
-      return rows[0];
-    } catch (error) {
-      console.log(error);
-    }
+    const { rows } = await db.query(query.findUserByEmail, [email]);
+    console.log(rows);
+    return rows[0];
   }
 }
 

@@ -32,6 +32,25 @@ class IncidentValidation {
 
     next();
   }
+
+  static incidentId(req, res, next) {
+    const schema = Joi.object({
+      redFlagId: Joi.number()
+        .integer()
+        .positive()
+        .min(1),
+    });
+
+    const { error } = schema.validate(req.params);
+    if (error) {
+      return res.status(401).json({
+        status: 401,
+        error: error.details[0].message,
+      });
+    }
+
+    next();
+  }
 }
 
 export default IncidentValidation;
