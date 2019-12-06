@@ -30,7 +30,7 @@ class UserController {
   static async getAllIncidents(req, res) {
     try {
       const incidents = await Incident.getAll(req.userData);
-      if (!incidents) {
+      if (incidents.length < 0) {
         return res.status(500).json({
           status: 404,
           error: 'No data available',
