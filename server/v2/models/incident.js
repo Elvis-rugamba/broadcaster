@@ -14,6 +14,20 @@ class Incident {
       throw error;
     }
   }
+
+  async getAll({ userType, userId }) {
+    try {
+      if (userType === 'admin') {
+        const incidents = await db.query(query.findIncidents);
+        return incidents.rows;
+      }
+      const incidents = await db.query(query.findIncidentByUserid, [userId]);
+      return incidents.rows;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 }
 
 export default new Incident();

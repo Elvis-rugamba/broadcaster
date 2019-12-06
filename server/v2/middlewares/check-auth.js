@@ -6,13 +6,16 @@ import query from '../db/queries';
 dotenv.config();
 
 export default async (req, res, next) => {
-  const [, token] = req.headers.token.split(' ');
-  if (!token) {
+  if (!req.headers.token) {
     return res.status(400).json({
       status: 400,
       error: 'Token not provided',
     });
   }
+
+
+  const [, token] = req.headers.token.split(' ');
+
   try {
     const decoded = await jwt.verify(token, process.env.JWT_KEY);
     const { rows } = await db.query(query.findUserByid, [decoded.userId]);

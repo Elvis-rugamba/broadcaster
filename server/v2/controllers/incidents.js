@@ -20,7 +20,21 @@ class UserController {
         }],
       });
     } catch (error) {
-      console.log(error);
+      res.status(500).json({
+        status: 500,
+        error: 'Internal Server Error!',
+      });
+    }
+  }
+
+  static async getAllIncidents(req, res) {
+    try {
+      const incidents = await Incident.getAll(req.userData);
+      return res.status(200).json({
+        status: 200,
+        data: incidents,
+      });
+    } catch (error) {
       res.status(500).json({
         status: 500,
         error: 'Internal Server Error!',

@@ -9,4 +9,6 @@ const router = express.Router();
 router.post('/', checkAuth, upload.fields([{ name: 'images', maxCount: 5 }, { name: 'videos', maxCount: 5 }]),
   IncidentValidation.validateIncident, IncidentsController.createIncident);
 
+router.get('/', checkAuth, IncidentsController.getAllIncidents);
+
 export default router;
