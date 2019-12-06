@@ -71,6 +71,8 @@ const findIncidentByUserid = 'SELECT * FROM incidents WHERE createdby = $1';
 
 const findIncidentByUseridAndId = 'SELECT * FROM incidents WHERE createdby = $1 AND id = $2';
 
+const deleteIncidentByUseridAndId = 'DELETE FROM incidents WHERE createdby = $1 AND id = $2 RETURNIG *';
+
 export default {
   testConn,
   createTestUsersTable,
@@ -93,4 +95,5 @@ export default {
   findIncidentByid,
   findIncidentByUserid,
   findIncidentByUseridAndId,
+  deleteIncidentByUseridAndId,
 };

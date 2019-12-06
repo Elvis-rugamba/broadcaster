@@ -260,11 +260,11 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
             .get('/api/v2/red-flags/12111111111')
             .set('token', `Bearer ${response.body.data.token}`)
             .then((res) => {
-              expect(res).to.have.status(500);
+              expect(res).to.have.status(400 || 500);
               expect(res.body).to.be.an('object');
               expect(res.body).to.have.property('status');
               expect(res.body).to.have.property('error');
-              expect(res.body.status).to.be.eql(500);
+              expect(res.body.status).to.be.eql(400 || 500);
               done();
             })
             .catch((err) => done(err));
@@ -285,6 +285,132 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
               expect(res.body).to.have.property('status');
               expect(res.body).to.have.property('error');
               expect(res.body.status).to.be.eql(404);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+  });
+
+  describe('DELETE /api/v2/red-flags/rdflag-id', () => {
+    it('it should delete specific ​red-flag ​record', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .delete('/api/v2/red-flags/1')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(200);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('data');
+              expect(res.body.status).to.be.eql(200);
+              expect(res.body.data).to.be.an('array');
+              expect(res.body.data[0]).to.be.an('object');
+              expect(res.body.data[0]).to.have.property('id');
+              expect(res.body.data[0]).to.have.property('message');
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not delete specific ​red-flag ​records without being authenticated', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .delete('/api/v2/red-flags/1')
+            .set('token', 'Bearer uknown/token')
+            .then((res) => {
+              expect(res).to.have.status(403);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(403);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not delete the ​red-flag​ record with invalid ID', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .delete('/api/v2/red-flags/ui')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(401);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(401);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not delete the ​red-flag​ record with unkown ID', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .delete('/api/v2/red-flags/12')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(404);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(404);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not delete the ​red-flag​ record with ID thati is not in range of integer', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .delete('/api/v2/red-flags/12111111111')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(400 || 500);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(400 || 500);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not delete the other user\'s ​red-flag​ record', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .delete('/api/v2/red-flags/2')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(404 || 403);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(404 || 403);
               done();
             })
             .catch((err) => done(err));
