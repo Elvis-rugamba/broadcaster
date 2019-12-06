@@ -13,4 +13,6 @@ router.get('/', checkAuth, IncidentsController.getAllIncidents);
 
 router.get('/:redFlagId', checkAuth, IncidentValidation.incidentId, IncidentsController.getSpecificInident);
 
+router.delete('/:redFlagId', checkAuth, IncidentValidation.incidentId, IncidentsController.deleteInident);
+
 export default router;

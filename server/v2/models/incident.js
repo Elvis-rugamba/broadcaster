@@ -28,6 +28,16 @@ class Incident {
     const incident = await db.query(query.findIncidentByUseridAndId, [userId, id]);
     return incident.rows[0];
   }
+
+  async getByid(id) {
+    const incident = await db.query(query.findIncidentByid, [id]);
+    return incident.rows[0];
+  }
+
+  async delete({ userId }, id) {
+    const removed = await db.query(query.findIncidentByUseridAndId, [userId, id]);
+    return removed.rows[0];
+  }
 }
 
 export default new Incident();
