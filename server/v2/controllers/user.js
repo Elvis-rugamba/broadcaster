@@ -44,7 +44,6 @@ class UserController {
         },
       });
     } catch (error) {
-      console.log(error);
       res.status(500).json({
         status: 500,
         error: 'Internal Server Error!',
@@ -79,7 +78,6 @@ class UserController {
         });
       }
     } catch (error) {
-      console.error(error);
       res.status(500).json({
         status: 500,
         error: 'Internal Server Error!',
