@@ -1281,7 +1281,7 @@ fieldset[disabled] .btn-edit-comment.active {
 @media only screen and (min-width: 600px) {
     .tile-grids {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr !important;
+        grid-template-columns: 1fr 1fr 1fr 1fr !important;
         grid-template-rows: auto !important;
         grid-column-gap: 1em !important;
     }
