@@ -1,10 +1,13 @@
 # broadcaster
 
 [![Build Status](https://travis-ci.org/Elvis-rugamba/broadcaster.svg?branch=integrate-travis-ci)](https://travis-ci.org/Elvis-rugamba/broadcaster)
-[![Coverage Status](https://coveralls.io/repos/github/Elvis-rugamba/broadcaster/badge.svg?branch=integrate-coveralls)](https://coveralls.io/github/Elvis-rugamba/broadcaster?branch=integrate-coveralls)
+[![Coverage Status](https://coveralls.io/repos/github/Elvis-rugamba/broadcaster/badge.svg?branch=fixing-travisCI-test-image-issue-169989415)](https://coveralls.io/github/Elvis-rugamba/broadcaster?branch=fixing-travisCI-test-image-issue-169989415)
 [![Maintainability](https://api.codeclimate.com/v1/badges/83a178d27820916e60c8/maintainability)](https://codeclimate.com/github/Elvis-rugamba/broadcaster/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/83a178d27820916e60c8/test_coverage)](https://codeclimate.com/github/Elvis-rugamba/broadcaster/test_coverage)
 
+
+Broadcaster enables any/every citizen to bring any form of corruption to the notice of appropriate
+authorities and the general public. Users can also report on things that need government intervention
 
 ## Getting Started
 
@@ -59,6 +62,10 @@
 - Use `https://broadcaster-api.herokuapp.com` as base url for endpoints
 
 - Use `https://broadcaster-api.herokuapp.com/api/v1/api-docs` for API document
+
+## Githug pages
+
+- Use ` https://elvis-rugamba.github.io/broadcaster/UI/`
 
 ## API Endpoints
 

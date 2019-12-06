@@ -1,0 +1,27 @@
+language: node_js
+
+node_js:
+
+  - "node"
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database dbtest;' -U postgres
+
+scripts:
+ - npm run lint && npm run test
+
+after_success: 
+  
+  - npm run coverage
+
+env:
+  - JWT_KEY: "secret"
+
+cache:
+
+  directories:
+
+    - "node_modules"

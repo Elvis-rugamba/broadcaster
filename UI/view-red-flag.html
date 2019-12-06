@@ -17,6 +17,7 @@
     </div>
     <nav>
         <ul>
+            <li><a href="admin-page.html">Admin</a></li>
             <li><a href="sign-in.html">Logout</a></li>
         </ul>
     </nav>
@@ -38,7 +39,8 @@
                 <li><a href="view-interventions.html">View interventions</a></li>
                 <li class="active"><a href="#">View incident</a></li>
                 <li class="divider"></li>
-                <li class="hidden-md"><a href="#">Logout</a></li>
+                <li class="hidden-md"><a href="admin-page.html">Admin</a></li>
+                <li class="hidden-md"><a href="sign-in.html">Logout</a></li>
             </ul>
         </nav>
         
@@ -52,8 +54,8 @@
             </ol>
         </div>
         <div class="forms">
-            <div class="form-grids widget-shadow">
-                <div class="form-title">Incident Detail:</div>
+            <div class="form-grids-sm widget-shadow">
+                <div class="form-title"><span class="title">Incident Detail:</span></div>
                 <div class="form-body">
                     <div class="form-group">
                         <h4 class="heading">Title: </h4>
@@ -140,7 +142,6 @@
         <!-- The Modal -->
         <div id="imgModal" class="modal">
             <span class="close" id="closeImg">&times;</span>
-            <!--<span class="prev-img">&#10094;</span>-->
             <div class="modal-content">
                 <div class="slides">
                     <div class="number-text">1 / 4</div>
@@ -149,12 +150,9 @@
                 <a class="prev-img">&#10094;</a>
                 <a class="next-img">&#10095;</a>
                 <div id="img-caption"></div>
-                <!-- Thumbnail image controls -->
                 <div class="column">
                 </div>
             </div>
-            <!--<span class="next-img">&#10095;</span>-->
-            <!-- Next/previous controls -->
         </div>
         <div id="vidModal" class="modal">
             <span class="close" id="closeVid">×</span>
@@ -170,7 +168,6 @@
                 <a class="prev-vid">&#10094;</a>
                 <a class="next-vid">&#10095;</a>
                 <div id="vid-caption"></div>
-                <!-- Thumbnail image controls -->
                 <div class="column">
                 </div>
             </div>
