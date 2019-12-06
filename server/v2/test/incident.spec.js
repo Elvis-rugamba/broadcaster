@@ -260,11 +260,11 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
             .get('/api/v2/red-flags/12111111111')
             .set('token', `Bearer ${response.body.data.token}`)
             .then((res) => {
-              expect(res).to.have.status(400 || 500);
+              expect(res).to.have.status(500);
               expect(res.body).to.be.an('object');
               expect(res.body).to.have.property('status');
               expect(res.body).to.have.property('error');
-              expect(res.body.status).to.be.eql(400 || 500);
+              expect(res.body.status).to.be.eql(500);
               done();
             })
             .catch((err) => done(err));
@@ -386,11 +386,11 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
             .delete('/api/v2/red-flags/12111111111')
             .set('token', `Bearer ${response.body.data.token}`)
             .then((res) => {
-              expect(res).to.have.status(400 || 500);
+              expect(res).to.have.status(500);
               expect(res.body).to.be.an('object');
               expect(res.body).to.have.property('status');
               expect(res.body).to.have.property('error');
-              expect(res.body.status).to.be.eql(400 || 500);
+              expect(res.body.status).to.be.eql(500);
               done();
             })
             .catch((err) => done(err));
