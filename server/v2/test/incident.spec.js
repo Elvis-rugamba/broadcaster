@@ -541,7 +541,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         });
     });
 
-    it('it should not update the ​red-flag ​record\'s comment with invalid location', (done) => {
+    it('it should not update the ​red-flag ​record\'s comment with invalid comment', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
         .send(userData.userLogin)
