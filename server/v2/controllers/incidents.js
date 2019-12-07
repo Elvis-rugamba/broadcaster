@@ -58,7 +58,7 @@ class UserController {
     }
 
     try {
-      const incident = await Incident.getOne(req.userData, id);
+      const incident = await Incident.getByid(id);
       if (!incident) {
         return res.status(404).json({
           status: 404,
@@ -75,18 +75,14 @@ class UserController {
         }
       }
 
+      const getIncident = await Incident.getOne(req.userData, id);
+
       return res.status(200).json({
         status: 200,
-        data: incident,
+        data: getIncident,
       });
     } catch (error) {
-      if (error.routine === 'pg_strtoint32') {
-        res.status(400).json({
-          status: 400,
-          error: 'The red-flag ID must be in range for type integer',
-        });
-      }
-      res.status(500).json({
+      return res.status(500).json({
         status: 500,
         error: 'Internal Server Error!',
       });
@@ -129,13 +125,7 @@ class UserController {
         }],
       });
     } catch (error) {
-      if (error.routine === 'pg_strtoint32') {
-        return res.status(400).json({
-          status: 400,
-          error: 'The red-flag ID must be in range for type integer',
-        });
-      }
-      res.status(500).json({
+      return res.status(500).json({
         status: 500,
         error: 'Internal Server Error!',
       });
@@ -179,14 +169,7 @@ class UserController {
         }],
       });
     } catch (error) {
-      console.log(error);
-      if (error.routine === 'pg_strtoint32') {
-        return res.status(400).json({
-          status: 400,
-          error: 'The red-flag ID must be in range for type integer',
-        });
-      }
-      res.status(500).json({
+      return res.status(500).json({
         status: 500,
         error: 'Internal Server Error!',
       });

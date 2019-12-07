@@ -3,8 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../server';
 import userData from './data/userData';
-import db from '../db/config';
-import query from '../db/queries';
+import User from '../models/user';
 
 dotenv.config();
 
@@ -13,6 +12,10 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('POST /api/v2/auth/signup', () => {
+  before((done) => {
+    User.create(userData.user);
+    done();
+  });
   it('it should create a user account and return auth token', (done) => {
     chai.request(server)
       .post('/api/v2/auth/signup')

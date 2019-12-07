@@ -9,6 +9,16 @@ const userRegister = {
   type: 'user',
 };
 
+const user = {
+  firstname: 'Elvis',
+  lastname: 'Rugamba',
+  email: 'elvis@gmail.com',
+  phoneNumber: '0789279770',
+  username: 'elvis',
+  password: '$2b$10$61MrELSTJ9YzrSFYltRa2uwvsRZlGVySxwfo/qduRIfZf6kvS2Tgi',
+  type: 'user',
+};
+
 const missingFields = {};
 
 const invalidEmail = {
@@ -72,7 +82,7 @@ const userLogin = {
 };
 
 const invalidLogin = {
-  email: 'elvis@gmail.com',
+  email: 'el@gmail.com',
   password: 'elVis123',
 };
 
@@ -90,6 +100,7 @@ const payload = {
 
 export default {
   userRegister,
+  user,
   missingFields,
   invalidEmail,
   existingEmail,
