@@ -19,6 +19,16 @@ const user = {
   type: 'user',
 };
 
+const admin = {
+  firstname: 'Elvis',
+  lastname: 'Rugamba',
+  email: 'elvisrugamba@gmail.com',
+  phoneNumber: '0789279774',
+  username: 'elvis-rugamba',
+  password: '$2b$10$61MrELSTJ9YzrSFYltRa2uwvsRZlGVySxwfo/qduRIfZf6kvS2Tgi',
+  type: 'admin',
+};
+
 const missingFields = {};
 
 const invalidEmail = {
@@ -81,6 +91,11 @@ const userLogin = {
   password: 'Rug123',
 };
 
+const adminLogin = {
+  email: 'elvisrugamba@gmail.com',
+  password: 'elVis123',
+};
+
 const invalidLogin = {
   email: 'el@gmail.com',
   password: 'elVis123',
@@ -110,4 +125,6 @@ export default {
   userLogin,
   invalidLogin,
   payload,
+  admin,
+  adminLogin,
 };

@@ -77,6 +77,8 @@ const updateLocation = 'UPDATE incidents SET location = $1 WHERE createdby = $2 
 
 const updateComment = 'UPDATE incidents SET comment = $1 WHERE createdby = $2 AND id = $3';
 
+const updateStatus = 'UPDATE incidents SET status = $1 WHERE id = $2';
+
 export default {
   testConn,
   createTestUsersTable,
@@ -102,4 +104,5 @@ export default {
   deleteIncidentByUseridAndId,
   updateLocation,
   updateComment,
+  updateStatus,
 };

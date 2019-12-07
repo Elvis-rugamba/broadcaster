@@ -30,6 +30,14 @@ const invalidComment = {
   comment: 'co',
 };
 
+const status = {
+  status: 'under investigation',
+};
+
+const invalidStatus = {
+  status: 'invalid',
+};
+
 export default {
   incident,
   location,
@@ -37,4 +45,6 @@ export default {
   invalidLocation,
   comment,
   invalidComment,
+  status,
+  invalidStatus,
 };

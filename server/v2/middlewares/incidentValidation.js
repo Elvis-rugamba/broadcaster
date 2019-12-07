@@ -87,6 +87,24 @@ class IncidentValidation {
 
     next();
   }
+
+  static validateStatus(req, res, next) {
+    const schema = Joi.object({
+      status: Joi.string()
+        .required()
+        .valid('draft', 'under investigation', 'rejected', 'resolved'),
+    });
+
+    const { error } = schema.validate(req.body);
+    if (error) {
+      return res.status(401).json({
+        status: 401,
+        error: error.details[0].message,
+      });
+    }
+
+    next();
+  }
 }
 
 export default IncidentValidation;

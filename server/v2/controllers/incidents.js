@@ -219,6 +219,50 @@ class UserController {
       });
     }
   }
+
+  static async updateStatus(req, res) {
+    const { redFlagId } = req.params;
+    const id = parseInt(redFlagId, 10);
+    if (Number.isNaN(id)) {
+      return res.status(400).json({
+        status: 400,
+        error: 'The red-flag ID must be a valid integer',
+      });
+    }
+
+    try {
+      const incident = await Incident.getByid(id);
+
+      if (!incident) {
+        return res.status(404).json({
+          status: 404,
+          error: 'The red-flag with the given ID not found',
+        });
+      }
+
+      if (req.userData.userType !== 'admin') {
+        return res.status(403).json({
+          status: 403,
+          error: 'Access to the resources denied',
+        });
+      }
+
+      await Incident.updateStatus(req.body, id);
+      return res.status(200).json({
+        status: 200,
+        data: [{
+          id: id,
+          message: '​Updated red-flag record’s status',
+
+        }],
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error: 'Internal Server Error!',
+      });
+    }
+  }
 }
 
 export default UserController;
