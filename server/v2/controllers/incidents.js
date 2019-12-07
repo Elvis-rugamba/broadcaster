@@ -115,6 +115,13 @@ class UserController {
         });
       }
 
+      if (incident.status !== 'draft') {
+        return res.status(401).json({
+          status: 401,
+          error: `Can not delete red-flag record because it is ${incident.status}`,
+        });
+      }
+
       await Incident.delete(req.userData, id);
       return res.status(200).json({
         status: 200,
@@ -159,6 +166,13 @@ class UserController {
         });
       }
 
+      if (incident.status !== 'draft') {
+        return res.status(401).json({
+          status: 401,
+          error: `Can not edit red-flag record's location because it is ${incident.status}`,
+        });
+      }
+
       await Incident.updateLocation(req.body, req.userData, id);
       return res.status(200).json({
         status: 200,
@@ -200,6 +214,13 @@ class UserController {
         return res.status(403).json({
           status: 403,
           error: 'Access to the resources denied',
+        });
+      }
+
+      if (incident.status !== 'draft') {
+        return res.status(401).json({
+          status: 401,
+          error: `Can not edit red-flag record's comment because it is ${incident.status}`,
         });
       }
 
