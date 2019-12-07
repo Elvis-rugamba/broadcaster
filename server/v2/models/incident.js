@@ -48,6 +48,11 @@ class Incident {
     const updated = await db.query(query.updateComment, [comment, userId, id]);
     return updated.rows[0];
   }
+
+  async updateStatus({ status }, id) {
+    const updated = await db.query(query.updateStatus, [status, id]);
+    return updated.rows[0];
+  }
 }
 
 export default new Incident();

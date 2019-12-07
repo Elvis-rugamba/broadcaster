@@ -21,4 +21,7 @@ router.patch('/:redFlagId/location', checkAuth, IncidentValidation.incidentId,
 router.patch('/:redFlagId/comment', checkAuth, IncidentValidation.incidentId,
   IncidentValidation.validateComment, IncidentsController.updateComment);
 
+router.patch('/:redFlagId/status', checkAuth, IncidentValidation.incidentId,
+  IncidentValidation.validateStatus, IncidentsController.updateStatus);
+
 export default router;
