@@ -22,9 +22,19 @@ const invalidLocation = {
   location: '14.12212.464',
 };
 
+const comment = {
+  comment: 'Updated comment',
+};
+
+const invalidComment = {
+  comment: 'co',
+};
+
 export default {
   incident,
   location,
   missingFields,
   invalidLocation,
+  comment,
+  invalidComment,
 };

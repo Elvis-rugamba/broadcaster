@@ -176,6 +176,129 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     });
   });
 
+  describe('GET /api/v2/red-flags/<red-flag-id>', () => {
+    it('it should fetch specific ​red-flag ​records', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags/2')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(200);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('data');
+              expect(res.body.status).to.be.eql(200);
+              expect(res.body.data).to.be.an('object');
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not fetch specific ​red-flag ​records without being authenticated', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags')
+            .set('token', 'Bearer uknown/token')
+            .then((res) => {
+              expect(res).to.have.status(403);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(403);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not fetch the ​red-flag​ record with invalid ID', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags/ui')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(401);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(401);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not fetch the ​red-flag​ record with unkown ID', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags/12')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(404);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(404);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not fetch the ​red-flag​ record with ID that is not in range of integer', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags/12111111111')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(500);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(500);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not fetch the other user\'s ​red-flag​ record', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .get('/api/v2/red-flags/1')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(403);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(403);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+  });
+
   describe('PATCH /api/v2/red-flags/<red-flag-id>/location', () => {
     it('it should update the ​red-flag ​record\'s location', (done) => {
       chai.request(server)
@@ -350,36 +473,41 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     });
   });
 
-  describe('GET /api/v2/red-flags/<red-flag-id>', () => {
-    it('it should fetch specific ​red-flag ​records', (done) => {
+  describe('PATCH /api/v2/red-flags/<red-flag-id>/comment', () => {
+    it('it should update the ​red-flag ​record\'s comment', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .get('/api/v2/red-flags/2')
+            .patch('/api/v2/red-flags/2/comment')
             .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.comment)
             .then((res) => {
               expect(res).to.have.status(200);
               expect(res.body).to.be.an('object');
               expect(res.body).to.have.property('status');
               expect(res.body).to.have.property('data');
               expect(res.body.status).to.be.eql(200);
-              expect(res.body.data).to.be.an('object');
+              expect(res.body.data).to.be.an('array');
+              expect(res.body.data[0]).to.be.an('object');
+              expect(res.body.data[0]).to.have.property('id');
+              expect(res.body.data[0]).to.have.property('message');
               done();
             })
             .catch((err) => done(err));
         });
     });
 
-    it('it should not fetch specific ​red-flag ​records without being authenticated', (done) => {
+    it('it should not update the ​red-flag ​record\'s comment without being authenticated', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .get('/api/v2/red-flags')
+            .patch('/api/v2/red-flags/1/comment')
             .set('token', 'Bearer uknown/token')
+            .send(incidentData.comment)
             .then((res) => {
               expect(res).to.have.status(403);
               expect(res.body).to.be.an('object');
@@ -392,14 +520,15 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         });
     });
 
-    it('it should not fetch the ​red-flag​ record with invalid ID', (done) => {
+    it('it should not update the ​red-flag ​record\'s comment with missing required field', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .get('/api/v2/red-flags/ui')
+            .patch('/api/v2/red-flags/2/comment')
             .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.missingFields)
             .then((res) => {
               expect(res).to.have.status(401);
               expect(res.body).to.be.an('object');
@@ -412,14 +541,57 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         });
     });
 
-    it('it should not fetch the ​red-flag​ record with unkown ID', (done) => {
+    it('it should not update the ​red-flag ​record\'s comment with invalid location', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .get('/api/v2/red-flags/12')
+            .patch('/api/v2/red-flags/2/comment')
             .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.invalidComment)
+            .then((res) => {
+              expect(res).to.have.status(401);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(401);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not update the ​red-flag​ record\'s comment with invalid ID', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .patch('/api/v2/red-flags/ui/comment')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.comment)
+            .then((res) => {
+              expect(res).to.have.status(401);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(401);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not update the ​red-flag​ record\'s comment with unkown ID', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .patch('/api/v2/red-flags/12/comment')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.comment)
             .then((res) => {
               expect(res).to.have.status(404);
               expect(res.body).to.be.an('object');
@@ -432,14 +604,15 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         });
     });
 
-    it('it should not fetch the ​red-flag​ record with ID that is not in range of integer', (done) => {
+    it('it should not update the ​red-flag​ record\'s comment with ID that is not in range of integer', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .get('/api/v2/red-flags/12111111111')
+            .patch('/api/v2/red-flags/12111111111/comment')
             .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.comment)
             .then((res) => {
               expect(res).to.have.status(500);
               expect(res.body).to.be.an('object');
@@ -452,14 +625,15 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         });
     });
 
-    it('it should not fetch the other user\'s ​red-flag​ record', (done) => {
+    it('it should not update the other user\'s ​red-flag​ record\'s comment', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .get('/api/v2/red-flags/1')
+            .patch('/api/v2/red-flags/1/comment')
             .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.comment)
             .then((res) => {
               expect(res).to.have.status(403);
               expect(res.body).to.be.an('object');
