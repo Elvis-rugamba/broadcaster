@@ -14,7 +14,6 @@ chai.use(chaiHttp);
 describe('POST /api/v2/auth/signup', () => {
   before((done) => {
     User.create(userData.user);
-    User.create(userData.admin);
     done();
   });
   it('it should create a user account and return auth token', (done) => {
