@@ -647,6 +647,180 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     });
   });
 
+  describe('PATCH /api/v2/red-flags/<red-flag-id>/status', () => {
+    it('it should update the ​red-flag ​record\'s status', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.adminLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .patch('/api/v2/red-flags/2/status')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.status)
+            .then((res) => {
+              expect(res).to.have.status(200);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('data');
+              expect(res.body.status).to.be.eql(200);
+              expect(res.body.data).to.be.an('array');
+              expect(res.body.data[0]).to.be.an('object');
+              expect(res.body.data[0]).to.have.property('id');
+              expect(res.body.data[0]).to.have.property('message');
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not update the ​red-flag ​record\'s status without being authenticated', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.adminLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .patch('/api/v2/red-flags/1/status')
+            .set('token', 'Bearer uknown/token')
+            .send(incidentData.comment)
+            .then((res) => {
+              expect(res).to.have.status(403);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(403);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not update the ​red-flag ​record\'s status with missing required field', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.adminLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .patch('/api/v2/red-flags/2/status')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.missingFields)
+            .then((res) => {
+              expect(res).to.have.status(401);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(401);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not update the ​red-flag ​record\'s status with invalid status', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.adminLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .patch('/api/v2/red-flags/2/status')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.invalidStatus)
+            .then((res) => {
+              expect(res).to.have.status(401);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(401);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not update the ​red-flag​ record\'s comment with invalid ID', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.adminLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .patch('/api/v2/red-flags/ui/status')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.status)
+            .then((res) => {
+              expect(res).to.have.status(401);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(401);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not update the ​red-flag​ record\'s status with unkown ID', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.adminLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .patch('/api/v2/red-flags/12/status')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.status)
+            .then((res) => {
+              expect(res).to.have.status(404);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(404);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not update the ​red-flag​ record\'s status with ID that is not in range of integer', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.adminLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .patch('/api/v2/red-flags/12111111111/status')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.status)
+            .then((res) => {
+              expect(res).to.have.status(500);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(500);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not update the other ​red-flag​ record\'s comment if user is not admin', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .patch('/api/v2/red-flags/2/status')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .send(incidentData.status)
+            .then((res) => {
+              expect(res).to.have.status(403);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(403);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+  });
+
   describe('DELETE /api/v2/red-flags/<red-flag-id>', () => {
     it('it should delete specific ​red-flag ​record', (done) => {
       chai.request(server)

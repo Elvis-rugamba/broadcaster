@@ -31,11 +31,11 @@ const invalidComment = {
 };
 
 const status = {
-  comment: 'under investigation',
+  status: 'under investigation',
 };
 
 const invalidStatus = {
-  comment: 'invalid',
+  status: 'invalid',
 };
 
 export default {
