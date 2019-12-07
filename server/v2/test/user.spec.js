@@ -93,6 +93,21 @@ describe('POST /api/v2/auth/signup', () => {
       })
       .catch((err) => done(err));
   });
+
+  it('it should not create a user account with field size greater than specified in database', (done) => {
+    chai.request(server)
+      .post('/api/v2/auth/signup')
+      .send(userData.fieldSize)
+      .then((res) => {
+        expect(res).to.have.status(500);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('status');
+        expect(res.body).to.have.property('error');
+        expect(res.body.status).to.be.eql(500);
+        done();
+      })
+      .catch((err) => done(err));
+  });
 });
 
 describe('POST /api/v2/auth/signin', () => {

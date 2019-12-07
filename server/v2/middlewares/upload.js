@@ -22,17 +22,11 @@ const fileFilter = (req, file, cb) => {
       error.status = 415;
       cb(error, false);
     }
-  } else if (file.fieldname === 'videos') {
-    if (file.mimetype === 'video/mp4' || file.mimetype === 'video/ogg') {
-      cb(null, true);
-    } else {
-      const error = new Error('Unsupported video file type');
-      error.status = 415;
-      cb(error, false);
-    }
+  } else if (file.mimetype === 'video/mp4' || file.mimetype === 'video/ogg') {
+    cb(null, true);
   } else {
-    const error = new Error('Invalid field name');
-    error.status = 400;
+    const error = new Error('Unsupported video file type');
+    error.status = 415;
     cb(error, false);
   }
 };

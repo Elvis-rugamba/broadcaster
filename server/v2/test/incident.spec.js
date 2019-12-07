@@ -103,6 +103,36 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         });
     });
 
+    it('it should not create a red-flag record with field value greater than specified in database', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .post('/api/v2/red-flags')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .field('title', 'Updated title test')
+            .field('type', 'intervention')
+            .field('comment', 'comment test')
+            .field('location', '50.555652525252525252525252, -45.56445254575652457524527557')
+            .attach(
+              'images', fs.readFileSync(`${__dirname}/data/sample files/Fishesharvested2.jpg`), 'Fishesharvested2.jpg',
+            )
+            .attach(
+              'videos', fs.readFileSync(`${__dirname}/data/sample files/mov_bbb.mp4`), 'mov_bbb.mp4',
+            )
+            .then((res) => {
+              expect(res).to.have.status(500);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(500);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
     it('it should not create a red-flag record with unsupported image or video file type', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
