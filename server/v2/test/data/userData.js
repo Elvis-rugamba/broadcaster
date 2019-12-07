@@ -15,7 +15,7 @@ const user = {
   email: 'elvis@gmail.com',
   phoneNumber: '0789279770',
   username: 'elvis',
-  password: '$2b$10$61MrELSTJ9YzrSFYltRa2uwvsRZlGVySxwfo/qduRIfZf6kvS2Tgi',
+  password: '$2b$10$1HW2vhFMWXXrj9/DWymAtONjNRvcsU9Pp7fxdx1NYkTCloS0iyOpy',
   type: 'user',
 };
 
@@ -91,6 +91,11 @@ const userLogin = {
   password: 'Rug123',
 };
 
+const userLogin2 = {
+  email: 'elvis@gmail.com',
+  password: 'Rug123',
+};
+
 const adminLogin = {
   email: 'elvisrugamba@gmail.com',
   password: 'elVis123',
@@ -127,4 +132,5 @@ export default {
   payload,
   admin,
   adminLogin,
+  userLogin2,
 };

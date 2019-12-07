@@ -6,6 +6,7 @@ import server from '../../server';
 import userData from './data/userData';
 import incidentData from './data/incidentData';
 import Incident from '../models/incident';
+import User from '../models/user';
 
 
 dotenv.config();
@@ -16,6 +17,7 @@ chai.use(chaiHttp);
 
 describe('Users create red-flag record, edit and delete their red-flags', () => {
   before((done) => {
+    const user = User.create(userData.admin);
     Incident.create(incidentData.incident.data, incidentData.incident.user,
       incidentData.incident.images, incidentData.incident.videos);
     done();
@@ -204,7 +206,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .get('/api/v2/red-flags')
+            .get('/api/v2/red-flags/2')
             .set('token', 'Bearer uknown/token')
             .then((res) => {
               expect(res).to.have.status(403);
@@ -331,7 +333,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .patch('/api/v2/red-flags/1/location')
+            .patch('/api/v2/red-flags/2/location')
             .set('token', 'Bearer uknown/token')
             .send(incidentData.location)
             .then((res) => {
@@ -352,7 +354,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .patch('/api/v2/red-flags/2/location')
+            .patch('/api/v2/red-flags/3/location')
             .set('token', `Bearer ${response.body.data.token}`)
             .send(incidentData.missingFields)
             .then((res) => {
@@ -505,7 +507,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .patch('/api/v2/red-flags/1/comment')
+            .patch('/api/v2/red-flags/2/comment')
             .set('token', 'Bearer uknown/token')
             .send(incidentData.comment)
             .then((res) => {
@@ -679,9 +681,9 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         .send(userData.adminLogin)
         .end((error, response) => {
           chai.request(server)
-            .patch('/api/v2/red-flags/1/status')
+            .patch('/api/v2/red-flags/2/status')
             .set('token', 'Bearer uknown/token')
-            .send(incidentData.comment)
+            .send(incidentData.status)
             .then((res) => {
               expect(res).to.have.status(403);
               expect(res.body).to.be.an('object');
@@ -799,7 +801,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         });
     });
 
-    it('it should not update the other ​red-flag​ record\'s comment if user is not admin', (done) => {
+    it('it should not update the red-flag​ record\'s status if user is not admin', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
         .send(userData.userLogin)
@@ -825,10 +827,10 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should delete specific ​red-flag ​record', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
-        .send(userData.userLogin)
+        .send(userData.userLogin2)
         .end((error, response) => {
           chai.request(server)
-            .delete('/api/v2/red-flags/2')
+            .delete('/api/v2/red-flags/1')
             .set('token', `Bearer ${response.body.data.token}`)
             .then((res) => {
               expect(res).to.have.status(200);
@@ -852,7 +854,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         .send(userData.userLogin)
         .end((error, response) => {
           chai.request(server)
-            .delete('/api/v2/red-flags/1')
+            .delete('/api/v2/red-flags/2')
             .set('token', 'Bearer uknown/token')
             .then((res) => {
               expect(res).to.have.status(403);
@@ -929,10 +931,10 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
     it('it should not delete the other user\'s ​red-flag​ record', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
-        .send(userData.userLogin)
+        .send(userData.userLogin2)
         .end((error, response) => {
           chai.request(server)
-            .delete('/api/v2/red-flags/1')
+            .delete('/api/v2/red-flags/2')
             .set('token', `Bearer ${response.body.data.token}`)
             .then((res) => {
               expect(res).to.have.status(403);
@@ -940,6 +942,26 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
               expect(res.body).to.have.property('status');
               expect(res.body).to.have.property('error');
               expect(res.body.status).to.be.eql(403);
+              done();
+            })
+            .catch((err) => done(err));
+        });
+    });
+
+    it('it should not delete the red-flag​ record that has status "under investigation, rejected, resolved"', (done) => {
+      chai.request(server)
+        .post('/api/v2/auth/signin')
+        .send(userData.userLogin)
+        .end((error, response) => {
+          chai.request(server)
+            .delete('/api/v2/red-flags/2')
+            .set('token', `Bearer ${response.body.data.token}`)
+            .then((res) => {
+              expect(res).to.have.status(401);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('status');
+              expect(res.body).to.have.property('error');
+              expect(res.body.status).to.be.eql(401);
               done();
             })
             .catch((err) => done(err));

@@ -8,6 +8,13 @@ const incident = {
   user: {
     userId: 1,
   },
+  user2: {
+    userId: 3,
+  },
+  id: 2,
+  status: {
+    status: 'under investigation',
+  },
   images: ['image1', 'image2'],
   videos: ['video1', 'video2'],
 };
