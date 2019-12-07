@@ -18,4 +18,7 @@ router.delete('/:redFlagId', checkAuth, IncidentValidation.incidentId, Incidents
 router.patch('/:redFlagId/location', checkAuth, IncidentValidation.incidentId,
   IncidentValidation.validateLoction, IncidentsController.updateLocation);
 
+router.patch('/:redFlagId/comment', checkAuth, IncidentValidation.incidentId,
+  IncidentValidation.validateComment, IncidentsController.updateComment);
+
 export default router;

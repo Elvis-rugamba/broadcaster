@@ -69,6 +69,24 @@ class IncidentValidation {
 
     next();
   }
+
+  static validateComment(req, res, next) {
+    const schema = Joi.object({
+      comment: Joi.string()
+        .min(3)
+        .required(),
+    });
+
+    const { error } = schema.validate(req.body);
+    if (error) {
+      return res.status(401).json({
+        status: 401,
+        error: error.details[0].message,
+      });
+    }
+
+    next();
+  }
 }
 
 export default IncidentValidation;
