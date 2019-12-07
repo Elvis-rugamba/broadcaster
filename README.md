@@ -1,7 +1,6 @@
 # broadcaster
 
 [![Build Status](https://travis-ci.org/Elvis-rugamba/broadcaster.svg?branch=integrate-travis-ci)](https://travis-ci.org/Elvis-rugamba/broadcaster)
-[![Coverage Status](https://coveralls.io/repos/github/Elvis-rugamba/broadcaster/badge.svg)](https://coveralls.io/github/Elvis-rugamba/broadcaster)
 [![Coverage Status](https://coveralls.io/repos/github/Elvis-rugamba/broadcaster/badge.svg?branch=develop)](https://coveralls.io/github/Elvis-rugamba/broadcaster?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/83a178d27820916e60c8/maintainability)](https://codeclimate.com/github/Elvis-rugamba/broadcaster/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/83a178d27820916e60c8/test_coverage)](https://codeclimate.com/github/Elvis-rugamba/broadcaster/test_coverage)
