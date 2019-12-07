@@ -28,6 +28,10 @@ authorities and the general public. Users can also report on things that need g
 - [Mocha](https://mochajs.org/).
 - [Chai](https://chaijs.com).
 
+## Database
+
+- [PostgreSQL](https://www.postgresql.org/).
+
 ## Installations
 
 #### Getting started
@@ -55,13 +59,13 @@ authorities and the general public. Users can also report on things that need g
 
 ## API Document
 
-- Use `http://localhost:3000/api/v1/api-docs`
+- Use `http://localhost:3000/api/v2/api-docs`
 
 ## Heroku
 
 - Use `https://broadcaster-api.herokuapp.com` as base url for endpoints
 
-- Use `https://broadcaster-api.herokuapp.com/api/v1/api-docs` for API document
+- Use `https://broadcaster-api.herokuapp.com/api/v2/api-docs` for API document
 
 ## Githug pages
 
@@ -71,16 +75,16 @@ authorities and the general public. Users can also report on things that need g
 
 | METHOD | DESCRIPTION                                     | ENDPOINTS                                  |
 | ------ | ----------------------------------------------- | ------------------------------------------ |
-| POST   | Create user account                             | `/api/v1/auth/signup`                      |
-| POST   | Login a user                                    | `/api/v1/auth/signin`                      |
-| GET    | Fetch all ​red-flag ​records                      | `/api/v1/red-flags`                        |
-| POST   | Create a red-flag ​record                        | `/api/v1/red-flags`                        |
-| GET    | Fetch a specific ​red-flag ​record                | `/api/v1/red-flags/:redFlagId`             |
-| PATCH  | Edit a specific red-flag record                 | `/api/v1/red-flags/:redFlagId`             |
-| PATCH  | Edit the location of a specific red-flag record | `/api/v1/red-flags/:redFlagId/location`    |
-| PATCH  | Edit the comment of a specific red-flag record  | `/api/v1/red-flags/:redFlagId/comment`     |
-| PATCH  | Edit the status of a specific red-flag record   | `/api/v1/red-flags/:redFlagId/status`      |
-| DELETE | Delete a specific red flag record               | `/api/v1/red-flags/:redFlagId`             |
+| POST   | Create user account                             | `/api/v2/auth/signup`                      |
+| POST   | Login a user                                    | `/api/v2/auth/signin`                      |
+| GET    | Fetch all ​red-flag ​records                      | `/api/v2/red-flags`                        |
+| POST   | Create a red-flag ​record                        | `/api/v2/red-flags`                        |
+| GET    | Fetch a specific ​red-flag ​record                | `/api/v2/red-flags/:redFlagId`             |
+| PATCH  | Edit a specific red-flag record                 | `/api/v2/red-flags/:redFlagId`             |
+| PATCH  | Edit the location of a specific red-flag record | `/api/v2/red-flags/:redFlagId/location`    |
+| PATCH  | Edit the comment of a specific red-flag record  | `/api/v2/red-flags/:redFlagId/comment`     |
+| PATCH  | Edit the status of a specific red-flag record   | `/api/v2/red-flags/:redFlagId/status`      |
+| DELETE | Delete a specific red flag record               | `/api/v2/red-flags/:redFlagId`             |
 
 
 ## Tests
