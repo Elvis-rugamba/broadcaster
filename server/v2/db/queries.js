@@ -75,6 +75,8 @@ const deleteIncidentByUseridAndId = 'DELETE FROM incidents WHERE createdby = $1 
 
 const updateLocation = 'UPDATE incidents SET location = $1 WHERE createdby = $2 AND id = $3';
 
+const updateComment = 'UPDATE incidents SET comment = $1 WHERE createdby = $2 AND id = $3';
+
 export default {
   testConn,
   createTestUsersTable,
@@ -99,4 +101,5 @@ export default {
   findIncidentByUseridAndId,
   deleteIncidentByUseridAndId,
   updateLocation,
+  updateComment,
 };
