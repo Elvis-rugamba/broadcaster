@@ -15,4 +15,7 @@ router.get('/:redFlagId', checkAuth, IncidentValidation.incidentId, IncidentsCon
 
 router.delete('/:redFlagId', checkAuth, IncidentValidation.incidentId, IncidentsController.deleteInident);
 
+router.patch('/:redFlagId/location', checkAuth, IncidentValidation.incidentId,
+  IncidentValidation.validateLoction, IncidentsController.updateLocation);
+
 export default router;

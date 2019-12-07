@@ -58,7 +58,7 @@ class UserController {
     }
 
     try {
-      const incident = await Incident.getOne(req.userData, id);
+      const incident = await Incident.getByid(id);
       if (!incident) {
         return res.status(404).json({
           status: 404,
@@ -75,18 +75,14 @@ class UserController {
         }
       }
 
+      const getIncident = await Incident.getOne(req.userData, id);
+
       return res.status(200).json({
         status: 200,
-        data: incident,
+        data: getIncident,
       });
     } catch (error) {
-      if (error.routine === 'pg_strtoint32') {
-        res.status(400).json({
-          status: 400,
-          error: 'The red-flag ID must be in range for type integer',
-        });
-      }
-      res.status(500).json({
+      return res.status(500).json({
         status: 500,
         error: 'Internal Server Error!',
       });
@@ -119,23 +115,61 @@ class UserController {
         });
       }
 
-      const removedIncident = await Incident.delete(req.userData, id);
+      await Incident.delete(req.userData, id);
       return res.status(200).json({
         status: 200,
         data: [{
-          id: removedIncident.id,
+          id: id,
           message: 'Red-flag record has been deleted',
 
         }],
       });
     } catch (error) {
-      if (error.routine === 'pg_strtoint32') {
-        res.status(400).json({
-          status: 400,
-          error: 'The red-flag ID must be in range for type integer',
+      return res.status(500).json({
+        status: 500,
+        error: 'Internal Server Error!',
+      });
+    }
+  }
+
+  static async updateLocation(req, res) {
+    const { redFlagId } = req.params;
+    const id = parseInt(redFlagId, 10);
+    if (Number.isNaN(id)) {
+      return res.status(400).json({
+        status: 400,
+        error: 'The red-flag ID must be a valid integer',
+      });
+    }
+
+    try {
+      const incident = await Incident.getByid(id);
+
+      if (!incident) {
+        return res.status(404).json({
+          status: 404,
+          error: 'The red-flag with the given ID not found',
         });
       }
-      res.status(500).json({
+
+      if (incident.createdby !== req.userData.userId) {
+        return res.status(403).json({
+          status: 403,
+          error: 'Access to the resources denied',
+        });
+      }
+
+      await Incident.updateLocation(req.body, req.userData, id);
+      return res.status(200).json({
+        status: 200,
+        data: [{
+          id: id,
+          message: '​Updated red-flag record’s location',
+
+        }],
+      });
+    } catch (error) {
+      return res.status(500).json({
         status: 500,
         error: 'Internal Server Error!',
       });

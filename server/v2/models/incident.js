@@ -35,8 +35,13 @@ class Incident {
   }
 
   async delete({ userId }, id) {
-    const removed = await db.query(query.findIncidentByUseridAndId, [userId, id]);
+    const removed = await db.query(query.deleteIncidentByUseridAndId, [userId, id]);
     return removed.rows[0];
+  }
+
+  async updateLocation({ location }, { userId }, id) {
+    const updated = await db.query(query.updateLocation, [location, userId, id]);
+    return updated.rows[0];
   }
 }
 

@@ -71,7 +71,9 @@ const findIncidentByUserid = 'SELECT * FROM incidents WHERE createdby = $1';
 
 const findIncidentByUseridAndId = 'SELECT * FROM incidents WHERE createdby = $1 AND id = $2';
 
-const deleteIncidentByUseridAndId = 'DELETE FROM incidents WHERE createdby = $1 AND id = $2 RETURNIG *';
+const deleteIncidentByUseridAndId = 'DELETE FROM incidents WHERE createdby = $1 AND id = $2';
+
+const updateLocation = 'UPDATE incidents SET location = $1 WHERE createdby = $2 AND id = $3';
 
 export default {
   testConn,
@@ -96,4 +98,5 @@ export default {
   findIncidentByUserid,
   findIncidentByUseridAndId,
   deleteIncidentByUseridAndId,
+  updateLocation,
 };
