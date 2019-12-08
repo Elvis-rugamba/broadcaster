@@ -86,6 +86,17 @@ const noConfirmPassword = {
   type: 'user',
 };
 
+const fieldSize = {
+  firstname: 'Elvis',
+  lastname: 'Rugamba',
+  email: 'rug@gmail.com',
+  phoneNumber: '078955645807895564580789556458',
+  username: 'rug',
+  password: 'Rug123',
+  password2: 'Rug123',
+  type: 'user',
+};
+
 const userLogin = {
   email: 'rugamba@gmail.com',
   password: 'Rug123',
@@ -127,6 +138,7 @@ export default {
   existingUserName,
   existingPhoneNumber,
   noConfirmPassword,
+  fieldSize,
   userLogin,
   invalidLogin,
   payload,
