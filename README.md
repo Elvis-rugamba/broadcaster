@@ -67,7 +67,7 @@ authorities and the general public. Users can also report on things that need g
 
 - Use `https://broadcaster-api.herokuapp.com/api/v2/api-docs` for API document
 
-## Githug pages
+## Github pages
 
 - Use ` https://elvis-rugamba.github.io/broadcaster/UI/`
 
