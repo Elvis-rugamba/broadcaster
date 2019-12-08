@@ -80,7 +80,6 @@ authorities and the general public. Users can also report on things that need g
 | GET    | Fetch all ​red-flag ​records                      | `/api/v2/red-flags`                        |
 | POST   | Create a red-flag ​record                        | `/api/v2/red-flags`                        |
 | GET    | Fetch a specific ​red-flag ​record                | `/api/v2/red-flags/:redFlagId`             |
-| PATCH  | Edit a specific red-flag record                 | `/api/v2/red-flags/:redFlagId`             |
 | PATCH  | Edit the location of a specific red-flag record | `/api/v2/red-flags/:redFlagId/location`    |
 | PATCH  | Edit the comment of a specific red-flag record  | `/api/v2/red-flags/:redFlagId/comment`     |
 | PATCH  | Edit the status of a specific red-flag record   | `/api/v2/red-flags/:redFlagId/status`      |
