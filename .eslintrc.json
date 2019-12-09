@@ -20,7 +20,7 @@
         "no-unused-vars": "warn",
         "no-console": "off",
         "eol-last": "off",
-        "linebreak-style": ["error", "windows"],
+        "linebreak-style": 0,
         "func-names": "off",
         "no-process-exit": "off",
         "no-process-env": "off",
