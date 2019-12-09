@@ -65,7 +65,8 @@ const createIncidents = `INSERT INTO incidents (title, type, comment, location, 
 
 const findIncidents = 'SELECT * FROM incidents';
 
-const findIncidentByid = 'SELECT * FROM incidents WHERE id = $1';
+const findIncidentByid = `SELECT incidents.*, users.firstname AS firstname, users.lastname AS lastname 
+    FROM incidents JOIN users ON users.id = incidents.createdby WHERE incidents.id = $1`;
 
 const findIncidentByUserid = 'SELECT * FROM incidents WHERE createdby = $1';
 
