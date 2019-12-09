@@ -17,7 +17,7 @@ chai.use(chaiHttp);
 
 describe('Users create red-flag record, edit and delete their red-flags', () => {
   before((done) => {
-    const user = User.create(userData.admin);
+    User.create(userData.admin);
     Incident.create(incidentData.incident.data, incidentData.incident.user,
       incidentData.incident.images, incidentData.incident.videos);
     done();
@@ -703,7 +703,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
             })
             .catch((err) => done(err));
         });
-    });
+    }).timeout(50000);
 
     it('it should not update the ​red-flag ​record\'s status without being authenticated', (done) => {
       chai.request(server)
@@ -768,7 +768,7 @@ describe('Users create red-flag record, edit and delete their red-flags', () => 
         });
     });
 
-    it('it should not update the ​red-flag​ record\'s comment with invalid ID', (done) => {
+    it('it should not update the ​red-flag​ record\'s status with invalid ID', (done) => {
       chai.request(server)
         .post('/api/v2/auth/signin')
         .send(userData.adminLogin)

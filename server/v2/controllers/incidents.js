@@ -1,4 +1,5 @@
 import Incident from '../models/incident';
+import Mailer from '../helpers/mailer';
 
 class UserController {
   static async createIncident(req, res) {
@@ -269,6 +270,8 @@ class UserController {
       }
 
       await Incident.updateStatus(req.body, id);
+      await Mailer.sendMail(incident, req.body);
+
       return res.status(200).json({
         status: 200,
         data: [{
