@@ -281,7 +281,6 @@ class UserController {
         }],
       });
     } catch (error) {
-      console.log(`${error} no error`);
       return res.status(500).json({
         status: 500,
         error: 'Internal Server Error!',
